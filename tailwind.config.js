@@ -12,7 +12,14 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', 'Figtree', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                chilo: {
+                    light: '#8aa6ab',
+                    DEFAULT: '#7c959c',
+                    dark: '#1f526b',
+                },
             },
         },
     },
