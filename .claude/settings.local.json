@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan:*)",
+      "Bash(npx vite:*)",
+      "Bash(ls postcss.config* 2>/dev/null; cat postcss.config.js 2>/dev/null || echo \"no postcss config\")",
+      "Bash(cd C:/xampp/htdocs/chilomkt && php -r \"require 'vendor/autoload.php'; \\\\$app = require 'bootstrap/app.php'; \\\\$app->make\\('Illuminate\\\\Contracts\\\\Console\\\\Kernel'\\)->bootstrap\\(\\); echo App\\\\Models\\\\Seccion::count\\(\\) . ' secciones' . PHP_EOL; foreach\\(App\\\\Models\\\\Seccion::all\\(\\) as \\\\$s\\) echo \\\\$s->clave . ' \\(' . \\\\$s->pagina . '\\)' . PHP_EOL;\")",
+      "Bash(cd C:/xampp/htdocs/chilomkt && echo \"use App\\\\Models\\\\Seccion; var_dump\\(Seccion::pluck\\('pagina','clave'\\)->toArray\\(\\)\\);\" | php artisan tinker 2>&1 | head -30)",
+      "Bash(cd C:/xampp/htdocs/chilomkt && echo \"var_dump\\(\\\\App\\\\Models\\\\Seccion::pluck\\('pagina','clave'\\)->toArray\\(\\)\\);\" | php artisan tinker 2>&1 | head -30)",
+      "Bash(cd C:/xampp/htdocs/chilomkt && npm install @alpinejs/collapse 2>&1)",
+      "Bash(cd C:/xampp/htdocs/chilomkt && npm run build 2>&1)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
