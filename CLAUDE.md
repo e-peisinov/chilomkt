@@ -43,7 +43,7 @@
 
 ### Layouts
 - `layouts/publica.blade.php` - Layout publico con nav y footer. Renderiza logo configurable; muestra link "Configuraciones" -> `/admin` cuando hay usuario autenticado.
-- `layouts/admin.blade.php` - Layout admin con sidebar (incluye "Crear usuario").
+- `layouts/admin.blade.php` - Layout admin con sidebar (incluye "Crear usuario"). El sidebar es un drawer deslizable en movil (Alpine `x-data="{ sidebarOpen }"` + overlay), `lg:sticky` fijo en desktop.
 - `layouts/guest.blade.php` - Layout de auth (login/register) rediseñado con branding ChiloMkt y logo configurable.
 
 ## Logo configurable
@@ -63,6 +63,15 @@
 - **Directorios**: `secciones/`, `servicios/`, `clientes/`, `equipo/`, `testimonios/`, `logo/`
 - **Secciones con imagen editable**: hero (inicio), inicio_proceso, nosotros_historia
 - **Modelos con imagen editable**: Servicio (imagen), Cliente (logo), MiembroEquipo (foto), Testimonio (foto)
+
+## Responsive (mobile/tablet/desktop)
+El sitio debe funcionar en todos los dispositivos. Patrones a respetar:
+- **Sidebar admin**: drawer Alpine en movil (`fixed`, `-translate-x-full` / `translate-x-0`), `lg:sticky lg:translate-x-0` en desktop, con overlay y boton cerrar. El boton hamburguesa usa `@click="sidebarOpen = true"`.
+- **Tablas admin**: SIEMPRE envolver en `<div class="overflow-x-auto">` + `<table class="w-full min-w-[600px]">` para evitar corte en pantallas chicas.
+- **Nunca usar clases Tailwind dinamicas** con valores variables (`grid-cols-{{ count(...) }}`): el JIT no las compila. Usar clases fijas responsivas (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`) o `flex flex-wrap`.
+- **`overflow-x-hidden`** en el body de `layouts/publica` como red de seguridad contra scroll horizontal de los blobs decorativos con offsets negativos.
+- **`[x-cloak]{display:none!important}`** definido en `resources/css/app.css` (necesario para que `x-cloak` funcione y no haya parpadeo de menus al cargar).
+- Heros internos usan `py-24 sm:py-32 lg:py-40`. Imagenes con alto fijo escalonan con breakpoints (ej. `h-72 sm:h-96 lg:h-[450px]`). Grids dentro de modales colapsan en movil (`grid-cols-1 sm:grid-cols-2`).
 
 ## Secciones CMS (tabla `secciones`)
 Claves existentes: `hero`, `inicio_estadisticas`, `servicios_intro`, `clientes_intro`, `inicio_proceso`, `inicio_testimonios`, `inicio_cta`, `nosotros_hero`, `nosotros_historia`, `nosotros_estadisticas`, `mision`, `vision`, `nosotros_valores`, `nosotros_equipo_intro`, `nosotros_cta`, `servicios_hero`, `servicios_cta`, `contacto_hero`, `contacto_cta`
