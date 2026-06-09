@@ -43,7 +43,7 @@
 | register (Volt) | `/register` | Crear usuario admin (solo logueado, no cambia sesion). Link "Crear usuario" en sidebar |
 
 ### Layouts
-- `layouts/publica.blade.php` - Layout publico con nav y footer. Renderiza logo configurable; muestra link "Configuraciones" -> `/admin` cuando hay usuario autenticado.
+- `layouts/publica.blade.php` - Layout publico con nav y footer. Renderiza logo configurable; muestra link "Configuraciones" -> `/admin` cuando hay usuario autenticado (en el menu de escritorio y tambien en el menu hamburguesa movil).
 - `layouts/admin.blade.php` - Layout admin con sidebar (incluye "Crear usuario"). El sidebar es un drawer deslizable en movil (Alpine `x-data="{ sidebarOpen }"` + overlay), `lg:sticky` fijo en desktop.
 - `layouts/guest.blade.php` - Layout de auth (login/register) rediseñado con branding ChiloMkt y logo configurable.
 
