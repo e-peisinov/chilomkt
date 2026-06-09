@@ -10,6 +10,7 @@ use App\Livewire\Admin\PaginaNosotros;
 use App\Livewire\Admin\PaginaServicios;
 use App\Livewire\Admin\PaginaContacto;
 use App\Livewire\Admin\GestionConfiguraciones;
+use App\Livewire\Admin\GestionMensajes;
 use Illuminate\Support\Facades\Route;
 
 // Paginas publicas
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/pagina/servicios', PaginaServicios::class)->name('pagina.servicios');
     Route::get('/pagina/contacto', PaginaContacto::class)->name('pagina.contacto');
     Route::get('/configuraciones', GestionConfiguraciones::class)->name('configuraciones');
+    Route::get('/mensajes', GestionMensajes::class)->name('mensajes');
 });
 
 Route::view('profile', 'profile')

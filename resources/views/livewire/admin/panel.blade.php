@@ -69,7 +69,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href="/admin/mensajes" wire:navigate class="block text-center text-chilo-dark font-medium text-sm mt-4 hover:underline">Ver todos los mensajes</a>
+            <a href="/admin/pagina/contacto" wire:navigate class="block text-center text-chilo-dark font-medium text-sm mt-4 hover:underline">Ver todos los mensajes</a>
         @else
             <p class="text-gray-500 text-sm">No hay mensajes aún.</p>
         @endif
