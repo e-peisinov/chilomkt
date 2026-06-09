@@ -1,6 +1,6 @@
 <div>
     {{-- Hero --}}
-    <section class="relative py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
+    <section class="relative py-24 sm:py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute top-20 right-20 w-72 h-72 bg-chilo/20 rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-10 left-10 w-96 h-96 bg-chilo-light/15 rounded-full blur-3xl animate-float-delay"></div>
@@ -21,7 +21,7 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div data-animate="slide-right" class="relative">
                     <div class="rounded-2xl overflow-hidden shadow-2xl shadow-chilo/20">
-                        <img src="{{ $historiaSeccion?->imagen ? asset('storage/' . $historiaSeccion->imagen) : 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop' }}" alt="Equipo ChiloMkt" class="w-full h-[450px] object-cover">
+                        <img src="{{ $historiaSeccion?->imagen ? asset('storage/' . $historiaSeccion->imagen) : 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop' }}" alt="Equipo ChiloMkt" class="w-full h-72 sm:h-96 lg:h-[450px] object-cover">
                     </div>
                     <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-gradient-to-br from-chilo-dark to-chilo rounded-2xl -z-10"></div>
                 </div>
@@ -32,7 +32,7 @@
                         {{ $hero?->contenido ?? '' }}
                     </p>
                     @if(count($estadisticas) > 0)
-                    <div class="grid grid-cols-{{ count($estadisticas) }} gap-6 mt-8">
+                    <div class="flex flex-wrap gap-6 sm:gap-10 mt-8">
                         @foreach($estadisticas as $est)
                         <div class="text-center">
                             <p class="text-3xl font-black text-chilo-dark">{{ $est['valor'] }}</p>
@@ -75,7 +75,7 @@
                 <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">{{ $valoresSeccion?->subtitulo ?? 'Lo que nos define' }}</span>
                 <h2 class="text-3xl md:text-4xl font-black text-gray-900">{{ $valoresSeccion?->titulo ?? 'Nuestros Valores' }}</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-{{ count($valores) > 0 ? count($valores) : 4 }} gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @php
                     $iconosValores = [
                         'shield' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',

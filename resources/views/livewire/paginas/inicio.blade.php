@@ -222,7 +222,7 @@
                 </div>
                 <div data-animate="slide-left" class="relative">
                     <div class="rounded-2xl overflow-hidden shadow-2xl shadow-chilo/20">
-                        <img src="{{ $procesoSeccion?->imagen ? asset('storage/' . $procesoSeccion->imagen) : 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=500&fit=crop' }}" alt="Equipo trabajando en estrategia" class="w-full h-[500px] object-cover">
+                        <img src="{{ $procesoSeccion?->imagen ? asset('storage/' . $procesoSeccion->imagen) : 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=500&fit=crop' }}" alt="Equipo trabajando en estrategia" class="w-full h-80 sm:h-96 lg:h-[500px] object-cover">
                     </div>
                     <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-gray-100" data-animate="scale" data-delay="0.4s">
                         <div class="flex items-center gap-3">

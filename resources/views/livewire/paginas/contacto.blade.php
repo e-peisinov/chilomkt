@@ -1,6 +1,6 @@
 <div>
     {{-- Hero --}}
-    <section class="relative py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
+    <section class="relative py-24 sm:py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute top-20 right-20 w-72 h-72 bg-chilo/20 rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-10 left-10 w-96 h-96 bg-chilo-light/15 rounded-full blur-3xl animate-float-delay"></div>

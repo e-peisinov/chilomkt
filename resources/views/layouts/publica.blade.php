@@ -13,7 +13,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased bg-white text-gray-800" style="font-family: 'Inter', sans-serif;">
+    <body class="antialiased bg-white text-gray-800 overflow-x-hidden" style="font-family: 'Inter', sans-serif;">
         @php
             $logoModo = App\Models\Configuracion::obtener('logo_modo', 'ambos');
             $logoTexto = App\Models\Configuracion::obtener('logo_texto') ?: App\Models\Configuracion::obtener('nombre_sitio', 'ChiloMkt');
