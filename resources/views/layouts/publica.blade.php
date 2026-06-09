@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ $titulo ?? 'ChiloMkt - Marketing Digital & Mentalidad' }}</title>
-        <meta name="description" content="{{ $metaDescripcion ?? 'Agencia de Marketing Digital & Mentalidad. Estrategia, habitos y crecimiento real para tu negocio.' }}">
+        <meta name="description" content="{{ $metaDescripcion ?? 'Agencia de Marketing Digital & Mentalidad. Estrategia, hábitos y crecimiento real para tu negocio.' }}">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
@@ -14,6 +14,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased bg-white text-gray-800" style="font-family: 'Inter', sans-serif;">
+        @php
+            $logoModo = App\Models\Configuracion::obtener('logo_modo', 'ambos');
+            $logoTexto = App\Models\Configuracion::obtener('logo_texto') ?: App\Models\Configuracion::obtener('nombre_sitio', 'ChiloMkt');
+            $logoImagen = App\Models\Configuracion::obtener('logo_imagen');
+        @endphp
         {{-- Navbar --}}
         <nav x-data="{ scrolled: false, open: false }"
              x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
@@ -22,10 +27,18 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20 items-center">
                     <a href="/" class="group flex items-center gap-2">
-                        <div class="w-10 h-10 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-white font-black text-lg">C</span>
-                        </div>
-                        <span :class="scrolled ? 'text-chilo-dark' : 'text-white'" class="text-xl font-bold transition-colors duration-300">ChiloMkt</span>
+                        @if($logoModo !== 'texto')
+                            @if($logoImagen)
+                                <img src="{{ asset('storage/' . $logoImagen) }}" alt="{{ $logoTexto }}" class="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-300">
+                            @else
+                                <div class="w-10 h-10 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-black text-lg">{{ mb_substr($logoTexto, 0, 1) }}</span>
+                                </div>
+                            @endif
+                        @endif
+                        @if($logoModo !== 'imagen')
+                            <span :class="scrolled ? 'text-chilo-dark' : 'text-white'" class="text-xl font-bold transition-colors duration-300">{{ $logoTexto }}</span>
+                        @endif
                     </a>
 
                     {{-- Mobile menu button --}}
@@ -56,6 +69,14 @@
                            class="ml-4 bg-gradient-to-r from-chilo-dark to-chilo text-white px-6 py-2.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-chilo-dark/30 hover:-translate-y-0.5 transition-all duration-300 text-sm">
                             Hablemos
                         </a>
+                        @if(auth()->check())
+                        <a href="/admin"
+                           wire:navigate
+                           :class="scrolled ? '{{ $link['active'] ? 'text-chilo-dark bg-chilo-light/20' : 'text-gray-600 hover:text-chilo-dark hover:bg-gray-100' }}' : '{{ $link['active'] ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}'"
+                            class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm">
+                            Configuraciones
+                        </a>
+                        @endif
                     </div>
                 </div>
 
@@ -100,15 +121,23 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
                     <div class="md:col-span-1">
                         <div class="flex items-center gap-2 mb-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-chilo to-chilo-light rounded-xl flex items-center justify-center">
-                                <span class="text-white font-black text-lg">C</span>
-                            </div>
-                            <span class="text-xl font-bold">ChiloMkt</span>
+                            @if($logoModo !== 'texto')
+                                @if($logoImagen)
+                                    <img src="{{ asset('storage/' . $logoImagen) }}" alt="{{ $logoTexto }}" class="h-10 w-auto object-contain">
+                                @else
+                                    <div class="w-10 h-10 bg-gradient-to-br from-chilo to-chilo-light rounded-xl flex items-center justify-center">
+                                        <span class="text-white font-black text-lg">{{ mb_substr($logoTexto, 0, 1) }}</span>
+                                    </div>
+                                @endif
+                            @endif
+                            @if($logoModo !== 'imagen')
+                                <span class="text-xl font-bold">{{ $logoTexto }}</span>
+                            @endif
                         </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">Marketing Digital & Mentalidad. Estrategia, habitos y crecimiento real para tu negocio.</p>
+                        <p class="text-gray-400 text-sm leading-relaxed">Marketing Digital & Mentalidad. Estrategia, hábitos y crecimiento real para tu negocio.</p>
                     </div>
                     <div>
-                        <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider text-chilo-light">Paginas</h4>
+                        <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider text-chilo-light">Páginas</h4>
                         <ul class="space-y-3">
                             <li><a href="/" wire:navigate class="text-gray-400 hover:text-white transition-colors text-sm">Inicio</a></li>
                             <li><a href="/nosotros" wire:navigate class="text-gray-400 hover:text-white transition-colors text-sm">Nosotros</a></li>
@@ -121,7 +150,7 @@
                         <ul class="space-y-3">
                             <li><span class="text-gray-400 text-sm">Redes Sociales</span></li>
                             <li><span class="text-gray-400 text-sm">Publicidad Digital</span></li>
-                            <li><span class="text-gray-400 text-sm">Diseno Web</span></li>
+                            <li><span class="text-gray-400 text-sm">Diseño Web</span></li>
                             <li><span class="text-gray-400 text-sm">Branding</span></li>
                         </ul>
                     </div>
