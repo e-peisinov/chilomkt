@@ -13,13 +13,28 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-gray-100">
-        <div class="min-h-screen flex">
+        <div class="min-h-screen flex" x-data="{ sidebarOpen: false }">
+            {{-- Overlay (mobile) --}}
+            <div x-show="sidebarOpen" x-cloak
+                 @click="sidebarOpen = false"
+                 x-transition:enter="transition-opacity ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition-opacity ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
+
             {{-- Sidebar --}}
-            <aside class="w-64 bg-chilo-dark text-white flex-shrink-0 hidden lg:block sticky top-0 h-screen overflow-y-auto">
-                <div class="p-6">
+            <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-chilo-dark text-white flex-shrink-0 overflow-y-auto transform transition-transform duration-300 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:z-auto"
+                   :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+                <div class="p-6 flex items-center justify-between">
                     <a href="/admin" wire:navigate class="text-xl font-bold">ChiloMkt Admin</a>
+                    <button @click="sidebarOpen = false" class="lg:hidden p-1 text-white/70 hover:text-white" aria-label="Cerrar menú">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
                 </div>
-                <nav class="mt-2 space-y-1 px-3">
+                <nav class="mt-2 space-y-1 px-3" @click="sidebarOpen = false">
                     <a href="/admin" wire:navigate class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium {{ request()->is('admin') && !request()->is('admin/*') ? 'bg-white/20 text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' }} transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                         Panel
@@ -77,12 +92,12 @@
             </aside>
 
             {{-- Main Content --}}
-            <div class="flex-1 flex flex-col">
+            <div class="flex-1 flex flex-col min-w-0">
                 {{-- Top bar (mobile) --}}
                 <header class="bg-white shadow-sm lg:hidden">
                     <div class="flex items-center justify-between p-4">
                         <a href="/admin" wire:navigate class="text-lg font-bold text-chilo-dark">ChiloMkt Admin</a>
-                        <button onclick="document.getElementById('mobile-sidebar').classList.toggle('hidden')" class="p-2 text-gray-600">
+                        <button @click="sidebarOpen = true" class="p-2 text-gray-600" aria-label="Abrir menú">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                         </button>
                     </div>

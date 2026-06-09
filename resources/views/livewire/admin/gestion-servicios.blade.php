@@ -7,7 +7,8 @@
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table class="w-full">
+        <div class="overflow-x-auto">
+        <table class="w-full min-w-[600px]">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Orden</th>
@@ -36,6 +37,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
 
     {{-- Modal --}}
@@ -54,7 +56,7 @@
                     <textarea wire:model="descripcion" rows="3" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo"></textarea>
                     @error('descripcion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Icono</label>
                         <input wire:model="icono" type="text" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo" placeholder="ej: share, globe, brain">

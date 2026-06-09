@@ -7,7 +7,8 @@
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table class="w-full">
+        <div class="overflow-x-auto">
+        <table class="w-full min-w-[600px]">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Orden</th>
@@ -41,6 +42,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
 
     @if($mostrarModal)
@@ -48,7 +50,7 @@
         <div class="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
             <h2 class="text-lg font-bold text-gray-800 mb-4">{{ $miembroId ? 'Editar' : 'Nuevo' }} miembro</h2>
             <form wire:submit="guardar" class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
                         <input wire:model="nombre" type="text" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo">
@@ -79,7 +81,7 @@
                     @error('foto') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     <p class="text-xs text-gray-400 mt-1">Foto del miembro (Recomendación 400x400)</p>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
                         <input wire:model="linkedin" type="url" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo">
