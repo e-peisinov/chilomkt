@@ -93,6 +93,9 @@
                         <a href="{{ $link['href'] }}" wire:navigate class="block px-4 py-3 rounded-xl text-gray-700 hover:bg-chilo-light/20 hover:text-chilo-dark font-medium transition-colors">{{ $link['label'] }}</a>
                     @endforeach
                     <a href="/contacto" wire:navigate class="block text-center bg-gradient-to-r from-chilo-dark to-chilo text-white px-4 py-3 rounded-xl font-semibold mt-2">Hablemos</a>
+                    @if(auth()->check())
+                        <a href="/admin" wire:navigate class="block px-4 py-3 rounded-xl text-gray-700 hover:bg-chilo-light/20 hover:text-chilo-dark font-medium transition-colors">Configuraciones</a>
+                    @endif
                 </div>
             </div>
         </nav>
