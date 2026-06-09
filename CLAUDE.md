@@ -33,12 +33,13 @@
 ### Admin (`app/Livewire/Admin/`) - protegido por `auth`, `verified`
 | Componente | Ruta | Funcion |
 |-----------|------|---------|
-| Panel | `/admin` | Dashboard con stats y mensajes recientes |
+| Panel | `/admin` | Dashboard con stats y mensajes recientes. "Ver todos los mensajes" enlaza a `/admin/pagina/contacto` |
 | PaginaInicio | `/admin/pagina/inicio` | CMS de inicio: hero, estadisticas, servicios, clientes, proceso, testimonios, CTA |
 | PaginaNosotros | `/admin/pagina/nosotros` | CMS de nosotros: hero, historia, estadisticas, mision, vision, valores, equipo, CTA |
 | PaginaServicios | `/admin/pagina/servicios` | CMS de servicios: hero, listado servicios, CTA |
 | PaginaContacto | `/admin/pagina/contacto` | CMS de contacto |
 | GestionConfiguraciones | `/admin/configuraciones` | Config global (email, tel, redes, direccion) + logo del sitio (texto/imagen/modo) |
+| GestionMensajes | `/admin/mensajes` | Listado paginado de mensajes de contacto (ver/eliminar). Acceso alternativo; no esta en el sidebar (los mensajes se gestionan en `/admin/pagina/contacto`) |
 | register (Volt) | `/register` | Crear usuario admin (solo logueado, no cambia sesion). Link "Crear usuario" en sidebar |
 
 ### Layouts
