@@ -72,7 +72,7 @@
                         @if(auth()->check())
                         <a href="/admin"
                            wire:navigate
-                           :class="scrolled ? '{{ $link['active'] ? 'text-chilo-dark bg-chilo-light/20' : 'text-gray-600 hover:text-chilo-dark hover:bg-gray-100' }}' : '{{ $link['active'] ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}'"
+                           :class="scrolled ? 'text-gray-600 hover:text-chilo-dark hover:bg-gray-100' : 'text-white/80 hover:text-white hover:bg-white/10'"
                             class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm">
                             Configuraciones
                         </a>
