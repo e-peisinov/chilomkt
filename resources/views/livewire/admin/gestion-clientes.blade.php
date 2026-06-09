@@ -12,7 +12,7 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Orden</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Descripcion</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Descripción</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Acciones</th>
                 </tr>
@@ -35,7 +35,7 @@
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
                             <button wire:click="editar({{ $cliente->id }})" class="text-chilo-dark hover:underline text-sm">Editar</button>
-                            <button wire:click="eliminar({{ $cliente->id }})" wire:confirm="Seguro que queres eliminar este cliente?" class="text-red-500 hover:underline text-sm">Eliminar</button>
+                            <button wire:click="eliminar({{ $cliente->id }})" wire:confirm="¿Seguro que querés eliminar este cliente?" class="text-red-500 hover:underline text-sm">Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
@@ -54,7 +54,7 @@
                     @error('nombre') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Descripcion</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                     <input wire:model="descripcion" type="text" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo">
                 </div>
                 <div>
@@ -64,8 +64,18 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Logo</label>
+                    @if($clienteId)
+                        @php $clienteExistente = \App\Models\Cliente::find($clienteId); @endphp
+                        @if($clienteExistente?->logo)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $clienteExistente->logo) }}" class="h-16 w-auto object-contain rounded bg-gray-100 p-1" alt="Logo actual">
+                                <button type="button" wire:click="quitarLogo" class="text-red-500 hover:underline text-xs mt-1">Eliminar imagen</button>
+                            </div>
+                        @endif
+                    @endif
                     <input wire:model="logo" type="file" class="w-full text-sm">
                     @error('logo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <p class="text-xs text-gray-400 mt-1">Logo del cliente (Recomendación 200x100)</p>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Orden</label>

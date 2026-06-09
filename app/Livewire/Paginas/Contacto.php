@@ -20,8 +20,8 @@ class Contacto extends Component
     {
         return [
             'nombre' => 'required|min:2|max:100',
-            'email' => 'required|email|max:100',
-            'telefono' => 'nullable|max:30',
+            'email' => 'nullable|email|max:100',
+            'telefono' => 'required|max:30',
             'asunto' => 'required|min:3|max:150',
             'mensaje' => 'required|min:10|max:2000',
         ];

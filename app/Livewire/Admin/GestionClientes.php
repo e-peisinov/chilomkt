@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class GestionClientes extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public bool $mostrarModal = false;
     public ?int $clienteId = null;
@@ -23,7 +25,7 @@ class GestionClientes extends Component
     {
         return [
             'nombre' => 'required|min:2|max:100',
-            'logo' => 'nullable|image|max:2048',
+            'logo' => $this->reglaImagen(),
             'sitio_web' => 'nullable|url|max:255',
             'descripcion' => 'nullable|max:500',
             'orden' => 'integer|min:0',
@@ -70,6 +72,18 @@ class GestionClientes extends Component
 
         $this->mostrarModal = false;
         $this->reset(['clienteId', 'nombre', 'logo', 'sitio_web', 'descripcion', 'orden', 'activo']);
+    }
+
+    public function quitarLogo()
+    {
+        if ($this->clienteId) {
+            $cliente = Cliente::findOrFail($this->clienteId);
+            if ($cliente->logo) {
+                Storage::disk('public')->delete($cliente->logo);
+                $cliente->update(['logo' => null]);
+            }
+        }
+        $this->logo = null;
     }
 
     public function eliminar(int $id)

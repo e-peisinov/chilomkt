@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\MiembroEquipo;
 use App\Models\Seccion;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class PaginaNosotros extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public $seccionActiva = '';
     public $secciones = [];
@@ -99,12 +101,14 @@ class PaginaNosotros extends Component
             ]
         );
 
-        $this->mensaje = 'Seccion guardada correctamente.';
+        $this->mensaje = 'Sección guardada correctamente.';
         $this->tipoMensaje = 'exito';
     }
 
     public function guardarHistoria()
     {
+        $this->validate(['historiaImagen' => $this->reglaImagen()]);
+
         // Guardar imagen de historia si se subio
         if ($this->historiaImagen && !is_string($this->historiaImagen)) {
             $ruta = $this->historiaImagen->store('secciones', 'public');
@@ -119,6 +123,20 @@ class PaginaNosotros extends Component
         $this->guardarSeccion('nosotros_historia');
         $this->guardarSeccion('nosotros_hero');
         $this->mensaje = 'Historia guardada correctamente.';
+        $this->tipoMensaje = 'exito';
+    }
+
+    public function quitarHistoriaImagen()
+    {
+        $imagen = $this->secciones['nosotros_historia']['imagen'] ?? '';
+        if (! empty($imagen)) {
+            Storage::disk('public')->delete($imagen);
+            Seccion::where('clave', 'nosotros_historia')->update(['imagen' => null]);
+            $this->secciones['nosotros_historia']['imagen'] = '';
+        }
+        $this->historiaImagen = null;
+
+        $this->mensaje = 'Imagen eliminada correctamente.';
         $this->tipoMensaje = 'exito';
     }
 
@@ -172,6 +190,8 @@ class PaginaNosotros extends Component
 
     public function guardarMiembro()
     {
+        $this->validate(['miembroFoto' => $this->reglaImagen()]);
+
         $datos = [
             'nombre' => $this->miembroNombre,
             'cargo' => $this->miembroCargo,
@@ -207,6 +227,18 @@ class PaginaNosotros extends Component
         $this->tipoMensaje = 'exito';
     }
 
+    public function quitarMiembroFoto()
+    {
+        if ($this->miembroId) {
+            $miembro = MiembroEquipo::findOrFail($this->miembroId);
+            if ($miembro->foto) {
+                Storage::disk('public')->delete($miembro->foto);
+                $miembro->update(['foto' => null]);
+            }
+        }
+        $this->miembroFoto = null;
+    }
+
     private function resetMiembro()
     {
         $this->miembroId = null;
@@ -224,6 +256,6 @@ class PaginaNosotros extends Component
     {
         return view('livewire.admin.pagina-nosotros', [
             'miembros' => MiembroEquipo::orderBy('orden')->get(),
-        ])->layout('layouts.admin', ['titulo' => 'Pagina Nosotros']);
+        ])->layout('layouts.admin', ['titulo' => 'Página Nosotros']);
     }
 }

@@ -11,7 +11,7 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Orden</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Titulo</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Título</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Icono</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Acciones</th>
@@ -30,7 +30,7 @@
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
                             <button wire:click="editar({{ $servicio->id }})" class="text-chilo-dark hover:underline text-sm">Editar</button>
-                            <button wire:click="eliminar({{ $servicio->id }})" wire:confirm="Seguro que queres eliminar este servicio?" class="text-red-500 hover:underline text-sm">Eliminar</button>
+                            <button wire:click="eliminar({{ $servicio->id }})" wire:confirm="¿Seguro que querés eliminar este servicio?" class="text-red-500 hover:underline text-sm">Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
@@ -45,12 +45,12 @@
             <h2 class="text-lg font-bold text-gray-800 mb-4">{{ $servicioId ? 'Editar' : 'Nuevo' }} servicio</h2>
             <form wire:submit="guardar" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Titulo *</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Título *</label>
                     <input wire:model="titulo" type="text" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo">
                     @error('titulo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Descripcion *</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Descripción *</label>
                     <textarea wire:model="descripcion" rows="3" class="w-full rounded-lg border-gray-300 focus:border-chilo focus:ring-chilo"></textarea>
                     @error('descripcion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
@@ -66,8 +66,18 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Imagen</label>
+                    @if($servicioId)
+                        @php $servicioExistente = \App\Models\Servicio::find($servicioId); @endphp
+                        @if($servicioExistente?->imagen)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $servicioExistente->imagen) }}" class="h-24 rounded-lg object-cover" alt="Imagen actual">
+                                <button type="button" wire:click="quitarImagen" class="text-red-500 hover:underline text-xs mt-1">Eliminar imagen</button>
+                            </div>
+                        @endif
+                    @endif
                     <input wire:model="imagen" type="file" class="w-full text-sm">
                     @error('imagen') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <p class="text-xs text-gray-400 mt-1">Imagen de la tarjeta del servicio (Recomendación 500x300)</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <input wire:model="activo" type="checkbox" id="activo" class="rounded border-gray-300 text-chilo-dark focus:ring-chilo">

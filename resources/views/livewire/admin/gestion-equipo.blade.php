@@ -35,7 +35,7 @@
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
                             <button wire:click="editar({{ $miembro->id }})" class="text-chilo-dark hover:underline text-sm">Editar</button>
-                            <button wire:click="eliminar({{ $miembro->id }})" wire:confirm="Seguro que queres eliminar este miembro?" class="text-red-500 hover:underline text-sm">Eliminar</button>
+                            <button wire:click="eliminar({{ $miembro->id }})" wire:confirm="¿Seguro que querés eliminar este miembro?" class="text-red-500 hover:underline text-sm">Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
@@ -66,8 +66,18 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Foto</label>
+                    @if($miembroId)
+                        @php $miembroExistente = \App\Models\MiembroEquipo::find($miembroId); @endphp
+                        @if($miembroExistente?->foto)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $miembroExistente->foto) }}" class="h-20 w-20 rounded-full object-cover" alt="Foto actual">
+                                <button type="button" wire:click="quitarFoto" class="text-red-500 hover:underline text-xs mt-1">Eliminar imagen</button>
+                            </div>
+                        @endif
+                    @endif
                     <input wire:model="foto" type="file" class="w-full text-sm">
                     @error('foto') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <p class="text-xs text-gray-400 mt-1">Foto del miembro (Recomendación 400x400)</p>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>

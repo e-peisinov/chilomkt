@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class GestionServicios extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public bool $mostrarModal = false;
     public ?int $servicioId = null;
@@ -25,7 +27,7 @@ class GestionServicios extends Component
             'titulo' => 'required|min:2|max:100',
             'descripcion' => 'required|min:10',
             'icono' => 'nullable|max:50',
-            'imagen' => 'nullable|image|max:2048',
+            'imagen' => $this->reglaImagen(),
             'orden' => 'integer|min:0',
         ];
     }
@@ -70,6 +72,18 @@ class GestionServicios extends Component
 
         $this->mostrarModal = false;
         $this->reset(['servicioId', 'titulo', 'descripcion', 'icono', 'imagen', 'orden', 'activo']);
+    }
+
+    public function quitarImagen()
+    {
+        if ($this->servicioId) {
+            $servicio = Servicio::findOrFail($this->servicioId);
+            if ($servicio->imagen) {
+                Storage::disk('public')->delete($servicio->imagen);
+                $servicio->update(['imagen' => null]);
+            }
+        }
+        $this->imagen = null;
     }
 
     public function eliminar(int $id)

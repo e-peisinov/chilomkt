@@ -1,0 +1,38 @@
+# =====================================================================
+# Seguridad de la carpeta de subidas (storage/app/public)
+# Servida publicamente a traves del symlink public/storage.
+#
+# Esta carpeta SOLO debe contener archivos subidos por usuarios (imagenes).
+# Bajo ninguna circunstancia debe ejecutar codigo del lado del servidor.
+# Aunque un atacante lograra subir un .php, aqui no se ejecuta: se bloquea.
+# =====================================================================
+
+# --- 1. Desactivar el motor de PHP (si corre como modulo de Apache) ---
+# Envuelto en IfModule para no romper el sitio si PHP corre via FPM/CGI.
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# --- 2. Quitar cualquier handler/tipo que pudiera ejecutar scripts ---
+<IfModule mod_mime.c>
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar .cgi .pl .py .asp .aspx .sh .jsp
+    RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar .cgi .pl .py .asp .aspx .sh .jsp
+</IfModule>
+
+# --- 3. Bloquear por completo la descarga/ejecucion de archivos peligrosos ---
+# Devuelve 403 para cualquier extension ejecutable o de script.
+<FilesMatch "(?i)\.(php|phtml|php[0-9]|pht|phar|cgi|pl|py|rb|asp|aspx|sh|bash|jsp|exe|bat|cmd|com|dll|so|htaccess|htpasswd)$">
+    Require all denied
+</FilesMatch>
+
+# --- 4. Defensa extra: forzar descarga (no interpretacion) de cualquier ---
+#     archivo que no sea una imagen reconocida, evitando ejecucion de HTML/SVG.
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

@@ -58,7 +58,7 @@ class PaginaContacto extends Component
             ]
         );
 
-        $this->mensaje = 'Seccion guardada correctamente.';
+        $this->mensaje = 'Sección guardada correctamente.';
         $this->tipoMensaje = 'exito';
     }
 
@@ -94,6 +94,6 @@ class PaginaContacto extends Component
     {
         return view('livewire.admin.pagina-contacto', [
             'mensajes' => MensajeContacto::latest()->paginate(10),
-        ])->layout('layouts.admin', ['titulo' => 'Pagina Contacto']);
+        ])->layout('layouts.admin', ['titulo' => 'Página Contacto']);
     }
 }

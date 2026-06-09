@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Testimonio;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class GestionTestimonios extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public bool $mostrarModal = false;
     public ?int $testimonioId = null;
@@ -27,7 +29,7 @@ class GestionTestimonios extends Component
             'cargo' => 'nullable|max:100',
             'empresa' => 'nullable|max:100',
             'contenido' => 'required|min:10',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => $this->reglaImagen(),
             'orden' => 'integer|min:0',
         ];
     }
@@ -74,6 +76,18 @@ class GestionTestimonios extends Component
 
         $this->mostrarModal = false;
         $this->reset(['testimonioId', 'nombre', 'cargo', 'empresa', 'contenido', 'foto', 'orden', 'activo']);
+    }
+
+    public function quitarFoto()
+    {
+        if ($this->testimonioId) {
+            $testimonio = Testimonio::findOrFail($this->testimonioId);
+            if ($testimonio->foto) {
+                Storage::disk('public')->delete($testimonio->foto);
+                $testimonio->update(['foto' => null]);
+            }
+        }
+        $this->foto = null;
     }
 
     public function eliminar(int $id)

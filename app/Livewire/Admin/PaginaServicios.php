@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Seccion;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class PaginaServicios extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public string $seccionActiva = '';
 
@@ -63,7 +65,7 @@ class PaginaServicios extends Component
             ]
         );
 
-        $this->mensaje = 'Seccion guardada correctamente.';
+        $this->mensaje = 'Sección guardada correctamente.';
         $this->tipoMensaje = 'exito';
     }
 
@@ -106,7 +108,7 @@ class PaginaServicios extends Component
             'servicioTitulo' => 'required|min:2|max:100',
             'servicioDescripcion' => 'required|min:10',
             'servicioIcono' => 'nullable|max:50',
-            'servicioImagen' => 'nullable|image|max:2048',
+            'servicioImagen' => $this->reglaImagen(),
             'servicioOrden' => 'integer|min:0',
         ];
 
@@ -137,6 +139,18 @@ class PaginaServicios extends Component
         $this->mostrarModalServicio = false;
     }
 
+    public function quitarServicioImagen(): void
+    {
+        if ($this->servicioId) {
+            $servicio = Servicio::findOrFail($this->servicioId);
+            if ($servicio->imagen) {
+                Storage::disk('public')->delete($servicio->imagen);
+                $servicio->update(['imagen' => null]);
+            }
+        }
+        $this->servicioImagen = null;
+    }
+
     public function eliminarServicio(int $id): void
     {
         Servicio::findOrFail($id)->delete();
@@ -149,6 +163,6 @@ class PaginaServicios extends Component
     {
         return view('livewire.admin.pagina-servicios', [
             'servicios' => Servicio::orderBy('orden')->get(),
-        ])->layout('layouts.admin', ['titulo' => 'Pagina Servicios']);
+        ])->layout('layouts.admin', ['titulo' => 'Página Servicios']);
     }
 }

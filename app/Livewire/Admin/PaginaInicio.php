@@ -2,16 +2,18 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Cliente;
 use App\Models\Seccion;
 use App\Models\Servicio;
 use App\Models\Testimonio;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class PaginaInicio extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public string $seccionActiva = '';
     public array $secciones = [];
@@ -97,6 +99,11 @@ class PaginaInicio extends Component
 
     public function guardarSeccion(string $clave): void
     {
+        $this->validate([
+            'heroImagen' => $this->reglaImagen(),
+            'procesoImagen' => $this->reglaImagen(),
+        ]);
+
         $seccionExistente = Seccion::where('clave', $clave)->first();
 
         $datos = [
@@ -129,7 +136,27 @@ class PaginaInicio extends Component
 
         $this->secciones[$clave]['imagen'] = Seccion::obtener($clave)?->imagen ?? '';
 
-        $this->mensaje = 'Seccion guardada correctamente.';
+        $this->mensaje = 'Sección guardada correctamente.';
+        $this->tipoMensaje = 'exito';
+    }
+
+    public function quitarImagenSeccion(string $clave): void
+    {
+        $imagen = $this->secciones[$clave]['imagen'] ?? '';
+        if (! empty($imagen)) {
+            Storage::disk('public')->delete($imagen);
+            Seccion::where('clave', $clave)->update(['imagen' => null]);
+            $this->secciones[$clave]['imagen'] = '';
+        }
+
+        if ($clave === 'hero') {
+            $this->heroImagen = null;
+        }
+        if ($clave === 'inicio_proceso') {
+            $this->procesoImagen = null;
+        }
+
+        $this->mensaje = 'Imagen eliminada correctamente.';
         $this->tipoMensaje = 'exito';
     }
 
@@ -182,6 +209,8 @@ class PaginaInicio extends Component
 
     public function guardarServicio(): void
     {
+        $this->validate(['servicioImagen' => $this->reglaImagen()]);
+
         $datos = [
             'titulo' => $this->servicioTitulo,
             'descripcion' => $this->servicioDescripcion,
@@ -212,6 +241,18 @@ class PaginaInicio extends Component
         Servicio::findOrFail($id)->delete();
         $this->mensaje = 'Servicio eliminado correctamente.';
         $this->tipoMensaje = 'exito';
+    }
+
+    public function quitarServicioImagen(): void
+    {
+        if ($this->servicioId) {
+            $servicio = Servicio::findOrFail($this->servicioId);
+            if ($servicio->imagen) {
+                Storage::disk('public')->delete($servicio->imagen);
+                $servicio->update(['imagen' => null]);
+            }
+        }
+        $this->servicioImagen = null;
     }
 
     private function resetServicio(): void
@@ -248,6 +289,8 @@ class PaginaInicio extends Component
 
     public function guardarCliente(): void
     {
+        $this->validate(['clienteLogo' => $this->reglaImagen()]);
+
         $datos = [
             'nombre' => $this->clienteNombre,
             'sitio_web' => $this->clienteSitioWeb,
@@ -278,6 +321,18 @@ class PaginaInicio extends Component
         Cliente::findOrFail($id)->delete();
         $this->mensaje = 'Cliente eliminado correctamente.';
         $this->tipoMensaje = 'exito';
+    }
+
+    public function quitarClienteLogo(): void
+    {
+        if ($this->clienteId) {
+            $cliente = Cliente::findOrFail($this->clienteId);
+            if ($cliente->logo) {
+                Storage::disk('public')->delete($cliente->logo);
+                $cliente->update(['logo' => null]);
+            }
+        }
+        $this->clienteLogo = null;
     }
 
     private function resetCliente(): void
@@ -315,6 +370,8 @@ class PaginaInicio extends Component
 
     public function guardarTestimonio(): void
     {
+        $this->validate(['testimonioFoto' => $this->reglaImagen()]);
+
         $datos = [
             'nombre' => $this->testimonioNombre,
             'cargo' => $this->testimonioCargo,
@@ -348,6 +405,18 @@ class PaginaInicio extends Component
         $this->tipoMensaje = 'exito';
     }
 
+    public function quitarTestimonioFoto(): void
+    {
+        if ($this->testimonioId) {
+            $testimonio = Testimonio::findOrFail($this->testimonioId);
+            if ($testimonio->foto) {
+                Storage::disk('public')->delete($testimonio->foto);
+                $testimonio->update(['foto' => null]);
+            }
+        }
+        $this->testimonioFoto = null;
+    }
+
     private function resetTestimonio(): void
     {
         $this->testimonioId = null;
@@ -368,6 +437,6 @@ class PaginaInicio extends Component
             'servicios' => Servicio::orderBy('orden')->get(),
             'clientes' => Cliente::orderBy('orden')->get(),
             'testimonios' => Testimonio::orderBy('orden')->get(),
-        ])->layout('layouts.admin', ['titulo' => 'Pagina de Inicio']);
+        ])->layout('layouts.admin', ['titulo' => 'Página de Inicio']);
     }
 }

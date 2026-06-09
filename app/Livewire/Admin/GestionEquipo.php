@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\MiembroEquipo;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class GestionEquipo extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public bool $mostrarModal = false;
     public ?int $miembroId = null;
@@ -27,7 +29,7 @@ class GestionEquipo extends Component
             'nombre' => 'required|min:2|max:100',
             'cargo' => 'required|min:2|max:100',
             'bio' => 'nullable|max:1000',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => $this->reglaImagen(),
             'linkedin' => 'nullable|url|max:255',
             'instagram' => 'nullable|url|max:255',
             'orden' => 'integer|min:0',
@@ -78,6 +80,18 @@ class GestionEquipo extends Component
 
         $this->mostrarModal = false;
         $this->reset(['miembroId', 'nombre', 'cargo', 'bio', 'foto', 'linkedin', 'instagram', 'orden', 'activo']);
+    }
+
+    public function quitarFoto()
+    {
+        if ($this->miembroId) {
+            $miembro = MiembroEquipo::findOrFail($this->miembroId);
+            if ($miembro->foto) {
+                Storage::disk('public')->delete($miembro->foto);
+                $miembro->update(['foto' => null]);
+            }
+        }
+        $this->foto = null;
     }
 
     public function eliminar(int $id)

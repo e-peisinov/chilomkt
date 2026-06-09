@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Seccion;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class GestionSecciones extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ValidaImagen;
 
     public bool $mostrarModal = false;
     public ?int $seccionId = null;
@@ -34,7 +36,7 @@ class GestionSecciones extends Component
             'titulo' => 'nullable|max:200',
             'subtitulo' => 'nullable|max:300',
             'contenido' => 'nullable',
-            'imagen' => 'nullable|image|max:2048',
+            'imagen' => $this->reglaImagen(),
         ]);
 
         $seccion = Seccion::findOrFail($this->seccionId);
@@ -48,6 +50,18 @@ class GestionSecciones extends Component
 
         $seccion->save();
         $this->mostrarModal = false;
+    }
+
+    public function quitarImagen()
+    {
+        if ($this->seccionId) {
+            $seccion = Seccion::findOrFail($this->seccionId);
+            if ($seccion->imagen) {
+                Storage::disk('public')->delete($seccion->imagen);
+                $seccion->update(['imagen' => null]);
+            }
+        }
+        $this->imagen = null;
     }
 
     public function render()

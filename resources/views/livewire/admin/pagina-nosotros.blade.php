@@ -1,12 +1,12 @@
 <div>
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Pagina Nosotros</h1>
-            <p class="text-gray-500 text-sm mt-1">Gestiona el contenido de la pagina Sobre Nosotros</p>
+            <h1 class="text-2xl font-bold text-gray-900">Página Nosotros</h1>
+            <p class="text-gray-500 text-sm mt-1">Gestiona el contenido de la página Sobre Nosotros</p>
         </div>
         <a href="/nosotros" target="_blank" class="text-sm text-chilo-dark hover:underline flex items-center gap-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            Ver pagina
+            Ver página
         </a>
     </div>
 
@@ -23,7 +23,7 @@
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 bg-chilo-dark/10 rounded-lg flex items-center justify-center text-chilo-dark font-bold text-xs">1</span>
                     <span class="font-semibold text-gray-900">Hero</span>
-                    <span class="text-xs text-gray-400">Titulo y subtitulo de la pagina</span>
+                    <span class="text-xs text-gray-400">Título y subtítulo de la página</span>
                 </div>
                 <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -31,11 +31,11 @@
                 <div class="p-4">
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
                             <input wire:model="secciones.nosotros_hero.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Subtitulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Subtítulo</label>
                             <input wire:model="secciones.nosotros_hero.subtitulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <button wire:click="guardarSeccion('nosotros_hero')" class="bg-chilo-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-chilo transition-colors">
@@ -52,7 +52,7 @@
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 bg-chilo-dark/10 rounded-lg flex items-center justify-center text-chilo-dark font-bold text-xs">2</span>
                     <span class="font-semibold text-gray-900">Historia</span>
-                    <span class="text-xs text-gray-400">Titulo de la seccion de historia</span>
+                    <span class="text-xs text-gray-400">Título de la sección de historia</span>
                 </div>
                 <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -64,7 +64,7 @@
                             <input wire:model="secciones.nosotros_historia.subtitulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
                             <input wire:model="secciones.nosotros_historia.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <div>
@@ -72,14 +72,15 @@
                             <textarea wire:model="secciones.nosotros_hero.contenido" rows="4" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark"></textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Imagen de la seccion</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Imagen de la sección</label>
                             @if(!empty($secciones['nosotros_historia']['imagen']))
                                 <div class="mb-2">
                                     <img src="{{ asset('storage/' . $secciones['nosotros_historia']['imagen']) }}" class="h-32 rounded-lg object-cover" alt="Historia actual">
+                                    <button type="button" wire:click="quitarHistoriaImagen" class="text-red-500 hover:underline text-xs mt-1">Eliminar imagen</button>
                                 </div>
                             @endif
                             <input wire:model="historiaImagen" type="file" accept="image/*" class="w-full text-sm">
-                            <p class="text-xs text-gray-400 mt-1">Imagen de "Mas que una agencia" (recomendado: 600x450px)</p>
+                            <p class="text-xs text-gray-400 mt-1">Imagen de "Más que una agencia" (Recomendación 600x450)</p>
                         </div>
                         <button wire:click="guardarHistoria" class="bg-chilo-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-chilo transition-colors">
                             Guardar Historia
@@ -94,8 +95,8 @@
             <button @click="open = !open" class="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 bg-chilo-dark/10 rounded-lg flex items-center justify-center text-chilo-dark font-bold text-xs">3</span>
-                    <span class="font-semibold text-gray-900">Estadisticas</span>
-                    <span class="text-xs text-gray-400">Numeros de la seccion historia</span>
+                    <span class="font-semibold text-gray-900">Estadísticas</span>
+                    <span class="text-xs text-gray-400">Números de la sección historia</span>
                 </div>
                 <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -105,7 +106,7 @@
                         @foreach($estadisticas as $i => $est)
                             <div class="flex items-center gap-3">
                                 <input wire:model="estadisticas.{{ $i }}.valor" type="text" placeholder="Ej: 5+" class="w-28 rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
-                                <input wire:model="estadisticas.{{ $i }}.etiqueta" type="text" placeholder="Ej: Anos" class="flex-1 rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
+                                <input wire:model="estadisticas.{{ $i }}.etiqueta" type="text" placeholder="Ej: Años" class="flex-1 rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                                 <button wire:click="eliminarEstadistica({{ $i }})" class="text-red-400 hover:text-red-600 p-1">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                 </button>
@@ -113,10 +114,10 @@
                         @endforeach
                         <button wire:click="agregarEstadistica" class="text-sm text-chilo-dark hover:underline flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                            Agregar estadistica
+                            Agregar estadística
                         </button>
                         <button wire:click="guardarSeccion('nosotros_estadisticas')" class="bg-chilo-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-chilo transition-colors">
-                            Guardar Estadisticas
+                            Guardar Estadísticas
                         </button>
                     </div>
                 </div>
@@ -128,7 +129,7 @@
             <button @click="open = !open" class="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 bg-chilo-dark/10 rounded-lg flex items-center justify-center text-chilo-dark font-bold text-xs">4</span>
-                    <span class="font-semibold text-gray-900">Mision</span>
+                    <span class="font-semibold text-gray-900">Misión</span>
                 </div>
                 <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -136,7 +137,7 @@
                 <div class="p-4">
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
                             <input wire:model="secciones.mision.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <div>
@@ -144,7 +145,7 @@
                             <textarea wire:model="secciones.mision.contenido" rows="3" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark"></textarea>
                         </div>
                         <button wire:click="guardarSeccion('mision')" class="bg-chilo-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-chilo transition-colors">
-                            Guardar Mision
+                            Guardar Misión
                         </button>
                     </div>
                 </div>
@@ -156,7 +157,7 @@
             <button @click="open = !open" class="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 bg-chilo-dark/10 rounded-lg flex items-center justify-center text-chilo-dark font-bold text-xs">5</span>
-                    <span class="font-semibold text-gray-900">Vision</span>
+                    <span class="font-semibold text-gray-900">Visión</span>
                 </div>
                 <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -164,7 +165,7 @@
                 <div class="p-4">
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
                             <input wire:model="secciones.vision.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <div>
@@ -172,7 +173,7 @@
                             <textarea wire:model="secciones.vision.contenido" rows="3" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark"></textarea>
                         </div>
                         <button wire:click="guardarSeccion('vision')" class="bg-chilo-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-chilo transition-colors">
-                            Guardar Vision
+                            Guardar Visión
                         </button>
                     </div>
                 </div>
@@ -194,7 +195,7 @@
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Titulo de la seccion</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Título de la sección</label>
                                 <input wire:model="secciones.nosotros_valores.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                             </div>
                             <div>
@@ -211,13 +212,13 @@
                                         <select wire:model="valores.{{ $i }}.icono" class="w-28 rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                                             <option value="shield">Escudo</option>
                                             <option value="bolt">Rayo</option>
-                                            <option value="heart">Corazon</option>
+                                            <option value="heart">Corazón</option>
                                             <option value="users">Personas</option>
                                             <option value="star">Estrella</option>
                                         </select>
                                         <div class="flex-1 space-y-2">
-                                            <input wire:model="valores.{{ $i }}.titulo" type="text" placeholder="Titulo" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
-                                            <input wire:model="valores.{{ $i }}.descripcion" type="text" placeholder="Descripcion" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
+                                            <input wire:model="valores.{{ $i }}.titulo" type="text" placeholder="Título" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
+                                            <input wire:model="valores.{{ $i }}.descripcion" type="text" placeholder="Descripción" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                                         </div>
                                         <button wire:click="eliminarValor({{ $i }})" class="text-red-400 hover:text-red-600 p-1 mt-1">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
@@ -254,11 +255,11 @@
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Titulo de la seccion</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Título de la sección</label>
                                 <input wire:model="secciones.nosotros_equipo_intro.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Subtitulo</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Subtítulo</label>
                                 <input wire:model="secciones.nosotros_equipo_intro.subtitulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                             </div>
                         </div>
@@ -295,7 +296,7 @@
                                             <button wire:click="editarMiembro({{ $miembro->id }})" class="text-gray-400 hover:text-chilo-dark p-1">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                             </button>
-                                            <button wire:click="eliminarMiembro({{ $miembro->id }})" wire:confirm="Eliminar este miembro?" class="text-gray-400 hover:text-red-600 p-1">
+                                            <button wire:click="eliminarMiembro({{ $miembro->id }})" wire:confirm="¿Eliminar este miembro?" class="text-gray-400 hover:text-red-600 p-1">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                             </button>
                                         </div>
@@ -313,7 +314,7 @@
             <button @click="open = !open" class="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 bg-chilo-dark/10 rounded-lg flex items-center justify-center text-chilo-dark font-bold text-xs">8</span>
-                    <span class="font-semibold text-gray-900">Llamada a la Accion (CTA)</span>
+                    <span class="font-semibold text-gray-900">Llamada a la Acción (CTA)</span>
                 </div>
                 <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
@@ -321,15 +322,15 @@
                 <div class="p-4">
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
                             <input wire:model="secciones.nosotros_cta.titulo" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Subtitulo</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Subtítulo</label>
                             <textarea wire:model="secciones.nosotros_cta.subtitulo" rows="2" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark"></textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Texto del boton</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Texto del botón</label>
                             <input wire:model="secciones.nosotros_cta.contenido" type="text" class="w-full rounded-lg border-gray-300 text-sm focus:border-chilo-dark focus:ring-chilo-dark">
                         </div>
                         <button wire:click="guardarSeccion('nosotros_cta')" class="bg-chilo-dark text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-chilo transition-colors">
@@ -381,10 +382,12 @@
                                 @if($miembroExistente?->foto)
                                     <div class="mb-2">
                                         <img src="{{ asset('storage/' . $miembroExistente->foto) }}" class="h-20 w-20 rounded-full object-cover" alt="Foto actual">
+                                        <button type="button" wire:click="quitarMiembroFoto" class="text-red-500 hover:underline text-xs mt-1">Eliminar imagen</button>
                                     </div>
                                 @endif
                             @endif
                             <input wire:model="miembroFoto" type="file" accept="image/*" class="w-full text-sm">
+                            <p class="text-xs text-gray-400 mt-1">Foto del miembro (Recomendación 400x400)</p>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Orden</label>

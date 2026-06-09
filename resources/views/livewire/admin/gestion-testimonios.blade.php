@@ -30,7 +30,7 @@
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
                             <button wire:click="editar({{ $testimonio->id }})" class="text-chilo-dark hover:underline text-sm">Editar</button>
-                            <button wire:click="eliminar({{ $testimonio->id }})" wire:confirm="Seguro que queres eliminar este testimonio?" class="text-red-500 hover:underline text-sm">Eliminar</button>
+                            <button wire:click="eliminar({{ $testimonio->id }})" wire:confirm="¿Seguro que querés eliminar este testimonio?" class="text-red-500 hover:underline text-sm">Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
@@ -65,8 +65,18 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Foto</label>
+                    @if($testimonioId)
+                        @php $testimonioExistente = \App\Models\Testimonio::find($testimonioId); @endphp
+                        @if($testimonioExistente?->foto)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $testimonioExistente->foto) }}" class="h-16 w-16 object-cover rounded-full" alt="Foto actual">
+                                <button type="button" wire:click="quitarFoto" class="text-red-500 hover:underline text-xs mt-1">Eliminar imagen</button>
+                            </div>
+                        @endif
+                    @endif
                     <input wire:model="foto" type="file" class="w-full text-sm">
                     @error('foto') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <p class="text-xs text-gray-400 mt-1">Foto de perfil (Recomendación 200x200)</p>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Orden</label>
