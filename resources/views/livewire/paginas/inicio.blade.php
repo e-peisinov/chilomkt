@@ -31,7 +31,7 @@
                         </span>
                     </div>
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-white mb-6 animate-fade-up">
-                        {{ $hero?->titulo ?? 'Estrategia, habitos y crecimiento real para tu negocio' }}
+                        {{ $hero?->titulo ?? 'Estrategia, hábitos y crecimiento real para tu negocio' }}
                     </h1>
                     <p class="text-lg md:text-xl text-white/70 max-w-xl mb-8 animate-fade-up delay-200">
                         {{ $hero?->subtitulo ?? '' }}
@@ -74,7 +74,7 @@
                                 </div>
                                 <div>
                                     <p class="text-white font-bold text-sm">+340% Engagement</p>
-                                    <p class="text-white/60 text-xs">Ultimo trimestre</p>
+                                    <p class="text-white/60 text-xs">Último trimestre</p>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@
             <div class="text-center mb-16" data-animate="fade-up">
                 <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Confianza comprobada</span>
                 <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-                    {{ $clientesIntro?->titulo ?? 'Clientes que Confian en Nosotros' }}
+                    {{ $clientesIntro?->titulo ?? 'Clientes que confían en nosotros' }}
                 </h2>
                 <p class="text-gray-500 max-w-2xl mx-auto text-lg">
                     {{ $clientesIntro?->subtitulo ?? '' }}
@@ -204,7 +204,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div data-animate="slide-right">
-                    <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">{{ $procesoSeccion?->subtitulo ?? 'Como trabajamos' }}</span>
+                    <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">{{ $procesoSeccion?->subtitulo ?? 'Cómo trabajamos' }}</span>
                     <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">{{ $procesoSeccion?->titulo ?? 'Un proceso pensado para resultados reales' }}</h2>
                     <div class="space-y-6">
                         @foreach($pasos as $paso)
@@ -231,7 +231,7 @@
                             </div>
                             <div>
                                 <p class="font-bold text-gray-900">+150 proyectos</p>
-                                <p class="text-sm text-gray-500">completados con exito</p>
+                                <p class="text-sm text-gray-500">completados con éxito</p>
                             </div>
                         </div>
                     </div>
@@ -250,7 +250,7 @@
             <div class="text-center mb-16" data-animate="fade-up">
                 <span class="inline-block bg-white/10 backdrop-blur-sm text-white/90 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20">Testimonios</span>
                 <h2 class="text-3xl md:text-5xl font-black text-white mb-4">{{ $testimoniosSeccion?->titulo ?? 'Lo que dicen nuestros clientes' }}</h2>
-                <p class="text-white/50 max-w-2xl mx-auto text-lg">{{ $testimoniosSeccion?->subtitulo ?? 'Historias reales de crecimiento y transformacion.' }}</p>
+                <p class="text-white/50 max-w-2xl mx-auto text-lg">{{ $testimoniosSeccion?->subtitulo ?? 'Historias reales de crecimiento y transformación.' }}</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -294,8 +294,8 @@
                 <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
 
                 <div class="relative z-10">
-                    <h2 class="text-3xl md:text-5xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? 'Listo para el proximo nivel?' }}</h2>
-                    <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">{{ $ctaSeccion?->subtitulo ?? 'Agenda una consulta gratuita y descubri como podemos transformar tu marca con estrategia y mentalidad.' }}</p>
+                    <h2 class="text-3xl md:text-5xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? '¿Listo para el próximo nivel?' }}</h2>
+                    <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">{{ $ctaSeccion?->subtitulo ?? 'Agenda una consulta gratuita y descubrí cómo podemos transformar tu marca con estrategia y mentalidad.' }}</p>
                     <a href="/contacto" wire:navigate class="inline-flex items-center gap-2 bg-white text-chilo-dark px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-1 transition-all duration-300 text-lg">
                         {{ $ctaSeccion?->contenido ?? 'Empecemos ahora' }}
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

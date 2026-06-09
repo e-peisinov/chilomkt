@@ -18,24 +18,20 @@
     {{-- Servicios Grid --}}
     <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            @php
-                $imagenesFallback = [
-                    'share' => 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop',
-                    'megaphone' => 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=500&h=300&fit=crop',
-                    'globe' => 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&h=300&fit=crop',
-                    'brain' => 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=300&fit=crop',
-                    'envelope' => 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=500&h=300&fit=crop',
-                    'palette' => 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop',
-                ];
-            @endphp
-
             <div class="space-y-8">
                 @foreach($servicios as $i => $servicio)
                     <div data-animate="{{ $i % 2 === 0 ? 'slide-right' : 'slide-left' }}" class="group bg-white rounded-3xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-chilo/10 transition-all duration-500">
                         <div class="grid md:grid-cols-2 gap-0 {{ $i % 2 === 1 ? 'md:grid-flow-dense' : '' }}">
                             {{-- Image --}}
                             <div class="{{ $i % 2 === 1 ? 'md:col-start-2' : '' }} overflow-hidden">
-                                <img src="{{ $servicio->imagen ? asset('storage/' . $servicio->imagen) : ($imagenesFallback[$servicio->icono] ?? $imagenesFallback['share']) }}" alt="{{ $servicio->titulo }}" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                @if($servicio->imagen)
+                                    <img src="{{ asset('storage/' . $servicio->imagen) }}" alt="{{ $servicio->titulo }}" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                @else
+                                    {{-- Placeholder vacio cuando no hay imagen cargada --}}
+                                    <div class="w-full h-64 md:h-full bg-gray-100 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    </div>
+                                @endif
                             </div>
                             {{-- Content --}}
                             <div class="p-8 md:p-12 flex flex-col justify-center">
@@ -84,8 +80,8 @@
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
                 <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
                 <div class="relative z-10">
-                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? 'Necesitas algo personalizado?' }}</h2>
-                    <p class="text-white/80 text-lg mb-8">{{ $ctaSeccion?->subtitulo ?? 'Cada negocio es unico. Contanos que necesitas y armamos una propuesta a tu medida.' }}</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? '¿Necesitas algo personalizado?' }}</h2>
+                    <p class="text-white/80 text-lg mb-8">{{ $ctaSeccion?->subtitulo ?? 'Cada negocio es único. Contanos qué necesitas y armamos una propuesta a tu medida.' }}</p>
                     <a href="/contacto" wire:navigate class="inline-flex items-center gap-2 bg-white text-chilo-dark px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                         {{ $ctaSeccion?->contenido ?? 'Solicitar presupuesto' }}
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

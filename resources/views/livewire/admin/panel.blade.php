@@ -1,5 +1,5 @@
 <div>
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Panel de Administracion</h1>
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Panel de Administración</h1>
 
     {{-- Stats --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -49,9 +49,9 @@
         </div>
     </div>
 
-    {{-- Ultimos mensajes --}}
+    {{-- Últimos mensajes --}}
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Ultimos mensajes</h2>
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">Últimos mensajes</h2>
         @if($ultimosMensajes->count())
             <div class="space-y-3">
                 @foreach($ultimosMensajes as $msg)
@@ -71,7 +71,7 @@
             </div>
             <a href="/admin/mensajes" wire:navigate class="block text-center text-chilo-dark font-medium text-sm mt-4 hover:underline">Ver todos los mensajes</a>
         @else
-            <p class="text-gray-500 text-sm">No hay mensajes aun.</p>
+            <p class="text-gray-500 text-sm">No hay mensajes aún.</p>
         @endif
     </div>
 </div>

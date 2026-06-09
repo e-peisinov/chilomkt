@@ -8,7 +8,7 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium px-4 py-2 rounded-full mb-6 animate-fade-down">
-                Conocenos
+                Conócenos
             </span>
             <h1 class="text-4xl md:text-6xl font-black text-white mb-6 animate-fade-up">{{ $hero?->titulo ?? 'Sobre Nosotros' }}</h1>
             <p class="text-xl text-white/70 max-w-2xl mx-auto animate-fade-up delay-200">{{ $hero?->subtitulo ?? '' }}</p>
@@ -27,7 +27,7 @@
                 </div>
                 <div data-animate="slide-left">
                     <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">{{ $historiaSeccion?->subtitulo ?? 'Nuestra historia' }}</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">{{ $historiaSeccion?->titulo ?? 'Mas que una agencia, somos tu aliado estrategico' }}</h2>
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">{{ $historiaSeccion?->titulo ?? 'Más que una agencia, somos tu aliado estratégico' }}</h2>
                     <p class="text-gray-500 text-lg leading-relaxed">
                         {{ $hero?->contenido ?? '' }}
                     </p>
@@ -46,7 +46,7 @@
         </div>
     </section>
 
-    {{-- Mision y Vision --}}
+    {{-- Misión y Visión --}}
     <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -54,14 +54,14 @@
                     <div class="w-16 h-16 bg-gradient-to-br from-chilo-dark to-chilo rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
-                    <h3 class="text-2xl font-black text-gray-900 mb-4">{{ $mision?->titulo ?? 'Nuestra Mision' }}</h3>
+                    <h3 class="text-2xl font-black text-gray-900 mb-4">{{ $mision?->titulo ?? 'Nuestra misión' }}</h3>
                     <p class="text-gray-500 leading-relaxed text-lg">{{ $mision?->contenido ?? '' }}</p>
                 </div>
                 <div data-animate="fade-up" data-delay="0.15s" class="bg-white rounded-3xl p-10 border border-gray-100 hover:shadow-xl hover:shadow-chilo/10 transition-all duration-500 group">
                     <div class="w-16 h-16 bg-gradient-to-br from-chilo to-chilo-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                     </div>
-                    <h3 class="text-2xl font-black text-gray-900 mb-4">{{ $vision?->titulo ?? 'Nuestra Vision' }}</h3>
+                    <h3 class="text-2xl font-black text-gray-900 mb-4">{{ $vision?->titulo ?? 'Nuestra visión' }}</h3>
                     <p class="text-gray-500 leading-relaxed text-lg">{{ $vision?->contenido ?? '' }}</p>
                 </div>
             </div>
@@ -103,7 +103,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-animate="fade-up">
                 <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">El equipo</span>
-                <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">{{ $equipoIntro?->titulo ?? 'Las personas detras de ChiloMkt' }}</h2>
+                <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">{{ $equipoIntro?->titulo ?? 'Las personas detrás de ChiloMkt' }}</h2>
                 <p class="text-gray-500 max-w-2xl mx-auto text-lg">{{ $equipoIntro?->subtitulo ?? 'Profesionales apasionados que hacen posible la magia.' }}</p>
             </div>
 
@@ -151,8 +151,8 @@
             <div class="bg-gradient-to-br from-chilo-dark via-chilo to-chilo-light rounded-3xl p-12 md:p-16 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
                 <div class="relative z-10">
-                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? 'Queres trabajar con nosotros?' }}</h2>
-                    <p class="text-white/80 text-lg mb-8">{{ $ctaSeccion?->subtitulo ?? 'Contanos sobre tu proyecto y veamos como podemos ayudarte.' }}</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? '¿Querés trabajar con nosotros?' }}</h2>
+                    <p class="text-white/80 text-lg mb-8">{{ $ctaSeccion?->subtitulo ?? 'Contanos sobre tu proyecto y veamos cómo podemos ayudarte.' }}</p>
                     <a href="/contacto" wire:navigate class="inline-flex items-center gap-2 bg-white text-chilo-dark px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                         {{ $ctaSeccion?->contenido ?? 'Hablemos' }}
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

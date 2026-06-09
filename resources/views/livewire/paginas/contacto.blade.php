@@ -31,14 +31,14 @@
                         <div class="w-12 h-12 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-1">Telefono</h3>
+                        <h3 class="font-bold text-gray-900 mb-1">Teléfono</h3>
                         <p class="text-gray-500">{{ $telefonoContacto }}</p>
                     </div>
                     <div class="bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:shadow-chilo/10 transition-all duration-500 group border border-gray-100">
                         <div class="w-12 h-12 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-1">Ubicacion</h3>
+                        <h3 class="font-bold text-gray-900 mb-1">Ubicación</h3>
                         <p class="text-gray-500">{{ $direccionContacto }}</p>
                     </div>
                     @if($whatsapp)
@@ -70,20 +70,20 @@
                                         @error('nombre') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
                                     </div>
                                     <div>
-                                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
                                         <input wire:model="email" type="email" id="email" placeholder="tu@email.com" class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
                                         @error('email') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div>
-                                        <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">Telefono</label>
+                                        <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">Teléfono *</label>
                                         <input wire:model="telefono" type="text" id="telefono" placeholder="+54 9 11 ..." class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
                                         @error('telefono') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
                                     </div>
                                     <div>
                                         <label for="asunto" class="block text-sm font-semibold text-gray-700 mb-2">Asunto *</label>
-                                        <input wire:model="asunto" type="text" id="asunto" placeholder="Sobre que queres hablar?" class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
+                                        <input wire:model="asunto" type="text" id="asunto" placeholder="¿Sobre qué querés hablar?" class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
                                         @error('asunto') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
