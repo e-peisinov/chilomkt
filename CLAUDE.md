@@ -16,7 +16,7 @@
 |--------|-------|-------------|
 | Servicio | servicios | titulo, descripcion, icono, imagen, orden, activo |
 | Cliente | clientes | nombre, logo, sitio_web, descripcion, orden, activo |
-| Testimonio | testimonios | nombre, cargo, empresa, contenido, foto, orden, activo |
+| Testimonio | testimonios | nombre, cargo, empresa, contenido, foto, orden, activo. La seccion Testimonios fue eliminada de la pagina de inicio y del panel admin (a pedido del cliente); el modelo, la tabla y los datos se conservan pero ya NO se muestran ni se gestionan desde ninguna UI (el componente `GestionTestimonios` queda como codigo muerto, sin ruta) |
 | MiembroEquipo | miembros_equipo | nombre, cargo, bio, foto, linkedin, instagram, orden, activo |
 | Seccion | secciones | pagina, clave (unique), titulo, subtitulo, contenido, imagen |
 | Configuracion | configuraciones | clave (unique), valor |
@@ -34,7 +34,7 @@
 | Componente | Ruta | Funcion |
 |-----------|------|---------|
 | Panel | `/admin` | Dashboard con stats y mensajes recientes. "Ver todos los mensajes" enlaza a `/admin/pagina/contacto` |
-| PaginaInicio | `/admin/pagina/inicio` | CMS de inicio: hero, estadisticas, servicios, clientes, proceso, testimonios, CTA |
+| PaginaInicio | `/admin/pagina/inicio` | CMS de inicio: hero, estadisticas, servicios, clientes, proceso, CTA |
 | PaginaNosotros | `/admin/pagina/nosotros` | CMS de nosotros: hero, historia, estadisticas, mision, vision, valores, equipo, CTA |
 | PaginaServicios | `/admin/pagina/servicios` | CMS de servicios: hero, listado servicios, CTA |
 | PaginaContacto | `/admin/pagina/contacto` | CMS de contacto |
@@ -75,4 +75,4 @@ El sitio debe funcionar en todos los dispositivos. Patrones a respetar:
 - Heros internos usan `py-24 sm:py-32 lg:py-40`. Imagenes con alto fijo escalonan con breakpoints (ej. `h-72 sm:h-96 lg:h-[450px]`). Grids dentro de modales colapsan en movil (`grid-cols-1 sm:grid-cols-2`).
 
 ## Secciones CMS (tabla `secciones`)
-Claves existentes: `hero`, `inicio_estadisticas`, `servicios_intro`, `clientes_intro`, `inicio_proceso`, `inicio_testimonios`, `inicio_cta`, `nosotros_hero`, `nosotros_historia`, `nosotros_estadisticas`, `mision`, `vision`, `nosotros_valores`, `nosotros_equipo_intro`, `nosotros_cta`, `servicios_hero`, `servicios_cta`, `contacto_hero`, `contacto_cta`
+Claves existentes: `hero`, `inicio_estadisticas`, `servicios_intro`, `clientes_intro`, `inicio_proceso`, `inicio_cta`, `nosotros_hero`, `nosotros_historia`, `nosotros_estadisticas`, `mision`, `vision`, `nosotros_valores`, `nosotros_equipo_intro`, `nosotros_cta`, `servicios_hero`, `servicios_cta`, `contacto_hero`, `contacto_cta`
