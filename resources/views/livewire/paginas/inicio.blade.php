@@ -240,49 +240,6 @@
         </div>
     </section>
 
-    {{-- Testimonios Section --}}
-    @if($testimonios->count())
-    <section class="py-24 bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-chilo/20 rounded-full translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="text-center mb-16" data-animate="fade-up">
-                <span class="inline-block bg-white/10 backdrop-blur-sm text-white/90 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20">Testimonios</span>
-                <h2 class="text-3xl md:text-5xl font-black text-white mb-4">{{ $testimoniosSeccion?->titulo ?? 'Lo que dicen nuestros clientes' }}</h2>
-                <p class="text-white/50 max-w-2xl mx-auto text-lg">{{ $testimoniosSeccion?->subtitulo ?? 'Historias reales de crecimiento y transformación.' }}</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @foreach($testimonios as $i => $testimonio)
-                    <div data-animate="fade-up" data-delay="{{ $i * 0.15 }}s" class="glass rounded-2xl p-7 hover:bg-white/15 transition-all duration-500 group">
-                        {{-- Stars --}}
-                        <div class="flex gap-1 mb-4">
-                            @for($s = 0; $s < 5; $s++)
-                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            @endfor
-                        </div>
-                        <p class="text-white/80 leading-relaxed mb-6 italic">"{{ $testimonio->contenido }}"</p>
-                        <div class="flex items-center gap-3">
-                            @if($testimonio->foto)
-                                <img src="{{ asset('storage/' . $testimonio->foto) }}" alt="{{ $testimonio->nombre }}" class="w-12 h-12 rounded-full object-cover border-2 border-white/20">
-                            @else
-                                <div class="w-12 h-12 bg-gradient-to-br from-chilo to-chilo-light rounded-full flex items-center justify-center">
-                                    <span class="text-white font-bold">{{ mb_substr($testimonio->nombre, 0, 1) }}</span>
-                                </div>
-                            @endif
-                            <div>
-                                <h4 class="font-bold text-white">{{ $testimonio->nombre }}</h4>
-                                <p class="text-white/50 text-sm">{{ $testimonio->cargo }}{{ $testimonio->empresa ? ' - ' . $testimonio->empresa : '' }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif
-
     {{-- CTA Section --}}
     <section class="py-24 bg-white relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-chilo-light/10 to-chilo/5"></div>

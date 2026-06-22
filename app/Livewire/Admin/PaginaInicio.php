@@ -6,7 +6,6 @@ use App\Livewire\Concerns\ValidaImagen;
 use App\Models\Cliente;
 use App\Models\Seccion;
 use App\Models\Servicio;
-use App\Models\Testimonio;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -46,17 +45,6 @@ class PaginaInicio extends Component
     public int $clienteOrden = 0;
     public bool $clienteActivo = true;
 
-    // Testimonio CRUD
-    public bool $mostrarModalTestimonio = false;
-    public $testimonioId = null;
-    public string $testimonioNombre = '';
-    public string $testimonioCargo = '';
-    public string $testimonioEmpresa = '';
-    public string $testimonioContenido = '';
-    public $testimonioFoto = null;
-    public int $testimonioOrden = 0;
-    public bool $testimonioActivo = true;
-
     public function mount(): void
     {
         $claves = [
@@ -65,7 +53,6 @@ class PaginaInicio extends Component
             'servicios_intro',
             'clientes_intro',
             'inicio_proceso',
-            'inicio_testimonios',
             'inicio_cta',
         ];
 
@@ -346,89 +333,6 @@ class PaginaInicio extends Component
         $this->clienteActivo = true;
     }
 
-    // --- Testimonio CRUD ---
-
-    public function crearTestimonio(): void
-    {
-        $this->resetTestimonio();
-        $this->mostrarModalTestimonio = true;
-    }
-
-    public function editarTestimonio(int $id): void
-    {
-        $testimonio = Testimonio::findOrFail($id);
-        $this->testimonioId = $testimonio->id;
-        $this->testimonioNombre = $testimonio->nombre ?? '';
-        $this->testimonioCargo = $testimonio->cargo ?? '';
-        $this->testimonioEmpresa = $testimonio->empresa ?? '';
-        $this->testimonioContenido = $testimonio->contenido ?? '';
-        $this->testimonioFoto = null;
-        $this->testimonioOrden = $testimonio->orden ?? 0;
-        $this->testimonioActivo = (bool) $testimonio->activo;
-        $this->mostrarModalTestimonio = true;
-    }
-
-    public function guardarTestimonio(): void
-    {
-        $this->validate(['testimonioFoto' => $this->reglaImagen()]);
-
-        $datos = [
-            'nombre' => $this->testimonioNombre,
-            'cargo' => $this->testimonioCargo,
-            'empresa' => $this->testimonioEmpresa,
-            'contenido' => $this->testimonioContenido,
-            'orden' => $this->testimonioOrden,
-            'activo' => $this->testimonioActivo,
-        ];
-
-        if ($this->testimonioFoto && !is_string($this->testimonioFoto)) {
-            $datos['foto'] = $this->testimonioFoto->store('testimonios', 'public');
-        }
-
-        if ($this->testimonioId) {
-            Testimonio::findOrFail($this->testimonioId)->update($datos);
-            $this->mensaje = 'Testimonio actualizado correctamente.';
-        } else {
-            Testimonio::create($datos);
-            $this->mensaje = 'Testimonio creado correctamente.';
-        }
-
-        $this->tipoMensaje = 'exito';
-        $this->mostrarModalTestimonio = false;
-        $this->resetTestimonio();
-    }
-
-    public function eliminarTestimonio(int $id): void
-    {
-        Testimonio::findOrFail($id)->delete();
-        $this->mensaje = 'Testimonio eliminado correctamente.';
-        $this->tipoMensaje = 'exito';
-    }
-
-    public function quitarTestimonioFoto(): void
-    {
-        if ($this->testimonioId) {
-            $testimonio = Testimonio::findOrFail($this->testimonioId);
-            if ($testimonio->foto) {
-                Storage::disk('public')->delete($testimonio->foto);
-                $testimonio->update(['foto' => null]);
-            }
-        }
-        $this->testimonioFoto = null;
-    }
-
-    private function resetTestimonio(): void
-    {
-        $this->testimonioId = null;
-        $this->testimonioNombre = '';
-        $this->testimonioCargo = '';
-        $this->testimonioEmpresa = '';
-        $this->testimonioContenido = '';
-        $this->testimonioFoto = null;
-        $this->testimonioOrden = 0;
-        $this->testimonioActivo = true;
-    }
-
     // --- Render ---
 
     public function render()
@@ -436,7 +340,6 @@ class PaginaInicio extends Component
         return view('livewire.admin.pagina-inicio', [
             'servicios' => Servicio::orderBy('orden')->get(),
             'clientes' => Cliente::orderBy('orden')->get(),
-            'testimonios' => Testimonio::orderBy('orden')->get(),
         ])->layout('layouts.admin', ['titulo' => 'Página de Inicio']);
     }
 }

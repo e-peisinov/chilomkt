@@ -5,7 +5,6 @@ namespace App\Livewire\Admin;
 use App\Models\Cliente;
 use App\Models\MensajeContacto;
 use App\Models\Servicio;
-use App\Models\Testimonio;
 use Livewire\Component;
 
 class Panel extends Component
@@ -15,7 +14,6 @@ class Panel extends Component
         return view('livewire.admin.panel', [
             'totalServicios' => Servicio::count(),
             'totalClientes' => Cliente::count(),
-            'totalTestimonios' => Testimonio::count(),
             'mensajesNoLeidos' => MensajeContacto::where('leido', false)->count(),
             'ultimosMensajes' => MensajeContacto::latest()->take(5)->get(),
         ])->layout('layouts.admin', ['titulo' => 'Panel']);
