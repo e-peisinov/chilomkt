@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T00:00:00Z",
+  "title": "Design System: CHILO",
+  "extensions": {
+    "colorMeta": {
+      "amarillo": {
+        "role": "primary",
+        "displayName": "Amarillo Punto",
+        "canonical": "#FFB43A",
+        "note": "Aproximado de los posts de Instagram; a confirmar con el manual de marca.",
+        "tonalRamp": [
+          "#3d2600",
+          "#6b4300",
+          "#9c6400",
+          "#cc8710",
+          "#FFB43A",
+          "#ffc768",
+          "#ffdb9c",
+          "#fff0d6"
+        ]
+      },
+      "petroleo": {
+        "role": "secondary",
+        "displayName": "Verde Petróleo",
+        "canonical": "#124D47",
+        "note": "Aproximado de los posts de Instagram; a confirmar con el manual de marca.",
+        "tonalRamp": [
+          "#061c1a",
+          "#0c3430",
+          "#124D47",
+          "#1f6b63",
+          "#3a8c83",
+          "#68ada5",
+          "#a3d0ca",
+          "#dcefec"
+        ]
+      },
+      "negro": {
+        "role": "neutral",
+        "displayName": "Negro Feed",
+        "canonical": "#121212",
+        "note": "Aproximado de los posts de Instagram; a confirmar con el manual de marca.",
+        "tonalRamp": [
+          "#121212",
+          "#262626",
+          "#3b3b3b",
+          "#575757",
+          "#7a7a7a",
+          "#a0a0a0",
+          "#c8c8c8",
+          "#ededed"
+        ]
+      },
+      "hueso": {
+        "role": "neutral",
+        "displayName": "Hueso Cálido",
+        "canonical": "#E2E1DC",
+        "note": "Aproximado de los posts de Instagram; a confirmar con el manual de marca.",
+        "tonalRamp": [
+          "#262622",
+          "#45443f",
+          "#66655f",
+          "#8a8983",
+          "#adaca6",
+          "#cbcac4",
+          "#E2E1DC",
+          "#f4f3f0"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (Anton)",
+        "purpose": "h1 de cada página, mayúsculas, text-wrap balance. Fuente aproximada hasta el manual de marca."
+      },
+      "headline": {
+        "displayName": "Headline (Anton)",
+        "purpose": "Titular de cada slide y del cierre."
+      },
+      "title": {
+        "displayName": "Title (Anton)",
+        "purpose": "Titulares de servicio, pasos del método, bloques de contacto, equipo."
+      },
+      "remate": {
+        "displayName": "Remate (Kaushan Script)",
+        "purpose": "Una palabra final del titular marcada *así* en el CMS, girada -6°, en el color de remate del fondo. También stickers y el 'mkt' de la firma. Fuente aproximada."
+      },
+      "body": {
+        "displayName": "Texto (Hanken Grotesk)",
+        "purpose": "Bajadas y texto corrido en el color suave del fondo. Fuente aproximada."
+      },
+      "label": {
+        "displayName": "Rótulo (Hanken Grotesk 650)",
+        "purpose": "Cabecera de slide junto a la huella chica, navegación, etiquetas de campo, títulos de columna del pie."
+      }
+    },
+    "shadows": [
+      {
+        "name": "contorno-corrido",
+        "value": "border: 2px solid var(--trazo); transform: translate(.38em, .38em) (en ::after, detrás del elemento)",
+        "purpose": "Única capa 'debajo' del sistema: contorno vacío desplazado detrás de botones (.38em) y cintas (.32em/.3em). No es sombra: sin relleno ni desenfoque. Recurso nativo de los posts."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-chilo",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Contorno del botón (350ms) y barra que se esconde (500ms)."
+      },
+      {
+        "name": "scrub-escena",
+        "value": "GSAP ScrollTrigger, scrub 0.5-0.8, ease none; Lenis lerp 0.1",
+        "purpose": "Escenas atadas al scroll: cámara por la huella, carrusel horizontal, pictogramas, reglas del método, paralaje de calados."
+      },
+      {
+        "name": "pega",
+        "value": "from scale 1.7 + rotation ±18°, back.out(2.2), 0.7s, una vez",
+        "purpose": "Cintas y stickers que se pegan al entrar."
+      },
+      {
+        "name": "entra",
+        "value": "from y 34px + autoAlpha 0, expo.out, 0.9s, stagger 0.08, una vez",
+        "purpose": "Bloques de texto que entran."
+      },
+      {
+        "name": "reducido",
+        "value": "prefers-reduced-motion o ?captura: sin Lenis ni GSAP",
+        "purpose": "Todo queda apilado y completo; la luz REC no titila."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón amarillo",
+      "kind": "button",
+      "refersTo": "boton-amarillo",
+      "description": "Acción principal (WhatsApp) con contorno corrido que se acomoda al pasar el mouse.",
+      "html": "<div class=\"ds-fondo-negro\"><a href=\"#\" class=\"ds-boton ds-boton-amarillo\">Escribinos por WhatsApp <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-fondo-negro{background:#121212;color:#E2E1DC;--trazo:#FFB43A;padding:32px;isolation:isolate}.ds-boton{position:relative;display:inline-flex;align-items:center;gap:.65em;font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.045em;font-size:1.05rem;line-height:1;padding:1.05em 1.5em;text-decoration:none;border-radius:0}.ds-boton::after{content:'';position:absolute;inset:0;border:2px solid var(--trazo);transform:translate(.38em,.38em);z-index:-1;transition:transform .35s cubic-bezier(.16,1,.3,1);pointer-events:none}.ds-boton:hover::after,.ds-boton:focus-visible::after{transform:translate(0,0)}.ds-boton:active::after{transform:translate(-.15em,-.15em)}.ds-boton:focus-visible{outline:3px solid #FFB43A;outline-offset:3px}.ds-boton-amarillo{background:#FFB43A;color:#121212}"
+    },
+    {
+      "name": "Botón negro",
+      "kind": "button",
+      "refersTo": "boton-negro",
+      "description": "Misma forma sobre slides amarillos y en el envío del formulario.",
+      "html": "<div class=\"ds-fondo-amarillo\"><a href=\"#\" class=\"ds-boton ds-boton-negro\">Escribinos por WhatsApp</a></div>",
+      "css": ".ds-fondo-amarillo{background:#FFB43A;color:#121212;--trazo:#121212;padding:32px;isolation:isolate}.ds-boton{position:relative;display:inline-flex;align-items:center;gap:.65em;font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.045em;font-size:1.05rem;line-height:1;padding:1.05em 1.5em;text-decoration:none;border-radius:0}.ds-boton::after{content:'';position:absolute;inset:0;border:2px solid var(--trazo);transform:translate(.38em,.38em);z-index:-1;transition:transform .35s cubic-bezier(.16,1,.3,1);pointer-events:none}.ds-boton:hover::after,.ds-boton:focus-visible::after{transform:translate(0,0)}.ds-boton:active::after{transform:translate(-.15em,-.15em)}.ds-boton:focus-visible{outline:3px solid #121212;outline-offset:3px}.ds-boton-negro{background:#121212;color:#E2E1DC}"
+    },
+    {
+      "name": "Cinta",
+      "kind": "chip",
+      "refersTo": "cinta-petroleo",
+      "description": "Etiqueta inclinada con contorno corrido; el giro va en el envoltorio.",
+      "html": "<div class=\"ds-fondo-amarillo\"><span class=\"ds-giro-izq\"><span class=\"ds-cinta ds-cinta-negro\">Estrategia</span></span><span class=\"ds-giro-der\"><span class=\"ds-cinta ds-cinta-petroleo\">Manejo de redes</span></span></div>",
+      "css": ".ds-fondo-amarillo{background:#FFB43A;color:#121212;--trazo:#121212;padding:32px;isolation:isolate;font-size:1.5rem;display:flex;gap:20px;flex-wrap:wrap}.ds-giro-izq{display:inline-block;transform:rotate(-2deg)}.ds-giro-der{display:inline-block;transform:rotate(2deg)}.ds-cinta{position:relative;display:inline-block;font-family:Anton,Impact,sans-serif;text-transform:uppercase;line-height:1;padding:.38em .7em .34em}.ds-cinta::after{content:'';position:absolute;inset:0;transform:translate(.32em,.3em);border:2px solid var(--trazo);z-index:-1;pointer-events:none}.ds-cinta-negro{background:#121212;color:#E2E1DC}.ds-cinta-petroleo{background:#124D47;color:#E2E1DC}"
+    },
+    {
+      "name": "Sticker",
+      "kind": "custom",
+      "refersTo": "sticker-amarillo",
+      "description": "Círculo con una palabra manuscrita, decorativo.",
+      "html": "<div class=\"ds-fondo-negro\"><span class=\"ds-sticker\" aria-hidden=\"true\"><span>escribinos</span></span></div>",
+      "css": ".ds-fondo-negro{background:#121212;padding:32px}.ds-sticker{display:inline-flex;align-items:center;justify-content:center;width:144px;height:144px;border-radius:9999px;background:#FFB43A;color:#121212;font-family:'Kaushan Script',cursive;font-size:1.75rem;line-height:1}.ds-sticker>span{transform:rotate(-12deg)}"
+    },
+    {
+      "name": "Titular con remate",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Anton mayúsculas con un remate manuscrito torcido en el color de remate del fondo.",
+      "html": "<div class=\"ds-fondo-hueso\"><h2 class=\"ds-titular\">Método antes que <span class=\"ds-remate\">improvisación</span></h2></div>",
+      "css": ".ds-fondo-hueso{background:#E2E1DC;color:#121212;--remate:#124D47;padding:32px}.ds-titular{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.94;letter-spacing:.005em;font-size:4rem;margin:0;padding-bottom:.16em;text-wrap:balance}.ds-remate{display:inline-block;font-family:'Kaushan Script',cursive;text-transform:none;letter-spacing:0;color:var(--remate);font-size:.74em;line-height:1.05;transform:rotate(-6deg);margin-left:.12em;padding-right:.1em}"
+    },
+    {
+      "name": "Cabecera de slide",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Rótulo arriba a la izquierda y huella chica a la derecha, como en los carruseles de la marca.",
+      "html": "<div class=\"ds-fondo-negro\"><div class=\"ds-cabecera\"><p class=\"ds-rotulo\">Cómo trabajamos</p><svg class=\"ds-huella\" viewBox=\"-340 -340 610 680\" aria-hidden=\"true\"><path d=\"M 234.41 -196.69 A 306 306 0 1 0 234.41 196.69\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"60\" stroke-linecap=\"round\"/><path d=\"M 153.22 -147.96 A 213 213 0 1 0 153.22 147.96\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"60\" stroke-linecap=\"round\"/><path d=\"M 77.13 -91.93 A 120 120 0 1 0 77.13 91.93\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"60\" stroke-linecap=\"round\"/><circle cx=\"0\" cy=\"0\" r=\"47\" fill=\"#FFB43A\"/></svg></div></div>",
+      "css": ".ds-fondo-negro{background:#121212;color:#E2E1DC;padding:32px}.ds-cabecera{display:flex;align-items:center;justify-content:space-between;gap:24px}.ds-rotulo{margin:0;font-family:'Hanken Grotesk Variable',sans-serif;font-weight:650;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase}.ds-huella{width:28px;height:28px;overflow:visible;flex-shrink:0}"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Campo del formulario de contacto sobre hueso, con error.",
+      "html": "<div class=\"ds-fondo-hueso\"><label class=\"ds-rotulo\" for=\"ds-n\">Nombre *</label><input id=\"ds-n\" class=\"ds-campo\" placeholder=\"Cómo te llamás\"><p class=\"ds-error\">Contanos cómo te llamás.</p></div>",
+      "css": ".ds-fondo-hueso{background:#E2E1DC;color:#121212;padding:32px}.ds-rotulo{display:block;margin-bottom:10px;font-family:'Hanken Grotesk Variable',sans-serif;font-weight:650;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase}.ds-campo{display:block;width:100%;border:2px solid #121212;border-radius:0;background:transparent;padding:14px 16px;font-size:1.125rem;color:#121212;caret-color:#124D47;font-family:'Hanken Grotesk Variable',sans-serif;transition:border-color .15s}.ds-campo::placeholder{color:rgba(18,18,18,.7)}.ds-campo:focus{outline:none;border-color:#124D47}.ds-campo:focus-visible{outline:3px solid #FFB43A;outline-offset:3px}.ds-error{display:inline-block;margin-top:8px;background:#121212;color:#FFB43A;font-size:.875rem;font-weight:600;padding:4px 10px}"
+    },
+    {
+      "name": "Barra",
+      "kind": "nav",
+      "refersTo": "barra",
+      "description": "Barra fija negra con firma, rótulos y botón chico de WhatsApp.",
+      "html": "<header class=\"ds-barra\"><span class=\"ds-firma\">CHILO</span><nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Inicio</a><a href=\"#\">Nosotros</a><a href=\"#\">Servicios</a><a href=\"#\" class=\"ds-wa\">Escribinos</a></nav></header>",
+      "css": ".ds-barra{background:#121212;color:#E2E1DC;height:64px;padding:0 32px;display:flex;align-items:center;justify-content:space-between}.ds-firma{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:1.6rem}.ds-nav{display:flex;align-items:center;gap:32px}.ds-nav a{font-family:'Hanken Grotesk Variable',sans-serif;font-weight:650;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(226,225,220,.8);text-decoration:none;transition:color .15s}.ds-nav a:hover{color:#E2E1DC}.ds-nav a[aria-current]{color:#FFB43A}.ds-nav a:focus-visible{outline:3px solid #FFB43A;outline-offset:3px}.ds-nav a.ds-wa{background:#FFB43A;color:#121212;font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.05em;font-size:.875rem;padding:10px 16px;transition:background-color .15s}.ds-nav a.ds-wa:hover{background:#E2E1DC}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El carrusel que se desliza",
+    "overview": "El sitio es un carrusel más de @chilo.mkt. Cada sección es un slide con un fondo pleno que se turna con el siguiente; la página se lee como posts en fila, con la misma gramática que el feed: rótulo arriba a la izquierda y huella chica arriba a la derecha, titular enorme en condensada con un remate manuscrito torcido, letras gigantes caladas de fondo, cintas inclinadas, stickers circulares, visor REC y grilla de feed. La huella (tres arcos concéntricos y un punto amarillo) es la cámara: en Inicio se entra por sus arcos hasta que el punto se vuelve el fondo del slide siguiente, y en cada cierre se rearma hasta tamaño logo.\n\nLa densidad es de afiche, no de documento: pocos elementos por slide, tipografía que ocupa el ancho, mucho aire vertical entre la cabecera del slide y el titular. El material es plano: color pleno, línea de 2–3px y contorno corrido. La profundidad la dan el cambio de fondo entre slides, el calado de fondo y el movimiento atado al scroll, nunca sombras ni vidrio. El movimiento es parte del mundo, pero el sitio tiene que leerse completo sin él.\n\nRechazos confirmados por la dirección: la landing de agencia (hero centrado, fila de tarjetas iguales con íconos, logos grises), sombras blandas, gradientes y vidrio.",
+    "keyCharacteristics": [
+      "Cuatro fondos plenos que se turnan por slide; cada fondo trae sus propios colores de remate, trazo, calado y texto suave.",
+      "Anton en mayúsculas para todo lo que se grita; Kaushan Script solo como remate; Hanken Grotesk para leer.",
+      "Esquinas rectas en todo salvo stickers y puntos, que son círculos.",
+      "Contorno corrido (desplazado, sin relleno) como única \"sombra\" del sistema, en botones y cintas.",
+      "Scroll con escenas fijadas (huella, carrusel horizontal) que se desarman en una pila completa con movimiento reducido."
+    ],
+    "rules": [
+      {
+        "name": "The Slide Pleno Rule",
+        "body": "Una sección es un fondo pleno de la paleta y nada más. Nunca un gradiente, una imagen de fondo o un tinte intermedio; los componentes toman color de las variables del fondo, no de valores sueltos.",
+        "section": "colors"
+      },
+      {
+        "name": "The Turno Rule",
+        "body": "Dos slides seguidos no comparten fondo. El orden habitual alterna negro con hueso/amarillo/petróleo; el cierre de cada página es siempre amarillo.",
+        "section": "colors"
+      },
+      {
+        "name": "The Un Remate Rule",
+        "body": "Un titular lleva como mucho un remate manuscrito, al final o cerca del final. Kaushan Script no se usa para párrafos, botones ni navegación; fuera del titular solo aparece en stickers y en el \"mkt\" de la firma.",
+        "section": "typography"
+      },
+      {
+        "name": "The Gritar o Leer Rule",
+        "body": "Anton es para lo que se ve de lejos (titulares, botones, cintas, cifras, menú móvil); todo texto que se lee de corrido va en Hanken Grotesk. No hay pesos intermedios de Anton ni párrafos en mayúsculas.",
+        "section": "typography"
+      },
+      {
+        "name": "The Abajo a la Izquierda Rule",
+        "body": "El titular de un slide de apertura se apoya abajo a la izquierda; arriba van solo la cabecera y, si corresponde, el sticker. Nada centrado.",
+        "section": "layout"
+      },
+      {
+        "name": "The Pila Completa Rule",
+        "body": "Toda escena fijada tiene que leerse entera como pila vertical sin movimiento. Si algo solo existe dentro de la animación, está mal.",
+        "section": "layout"
+      },
+      {
+        "name": "The Contorno Corrido Rule",
+        "body": "La única capa \"debajo\" de un elemento es un contorno de 2px en el color de trazo del fondo, desplazado y vacío. Al pasar el mouse o con foco, el contorno de los botones se acomoda debajo del botón (`translate(0,0)`); al apretar, se pasa al otro lado. Sin sombras blandas, sin gradientes, sin vidrio, sin `backdrop-filter`.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Recto o Círculo Rule",
+        "body": "No existen radios intermedios. Si no es un círculo de la marca, tiene esquinas rectas.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do armar cada sección como un slide de fondo pleno (negro, hueso, amarillo o petróleo) que no repite el fondo del anterior, y cerrar cada página con el slide amarillo de cierre.",
+      "Do escribir los titulares en Anton mayúsculas con un solo remate manuscrito marcado `*así*` desde el CMS.",
+      "Do tomar remate, trazo, calado y texto suave de las variables del fondo en lugar de fijar colores en el componente.",
+      "Do usar el contorno corrido de 2px (vacío, desplazado) en botones y cintas, y esquinas rectas en todo lo que no sea un círculo de la marca.",
+      "Do enmarcar con el visor cualquier foto que llegue del CMS, y caer en el pictograma del servicio cuando no hay foto.",
+      "Do dibujar los íconos como SVG inline con `currentColor` (redes, flechas, contacto); nunca glifos ni emojis.",
+      "Do dejar que toda escena con movimiento se lea completa como pila vertical con `prefers-reduced-motion`."
+    ],
+    "donts": [
+      "Don't usar sombras blandas, gradientes, vidrio ni `backdrop-filter` en el sitio público.",
+      "Don't armar filas de tarjetas iguales con ícono, título y texto, ni centrar el hero: el titular va abajo a la izquierda.",
+      "Don't mostrar logos de clientes en gris ni inventar métricas, resultados o testimonios.",
+      "Don't usar radios intermedios (4–16px); o recto o círculo.",
+      "Don't poner Kaushan Script en párrafos, botones o navegación, ni más de un remate por titular.",
+      "Don't usar el rótulo como etiqueta suelta encima de un titular: solo vive en la cabecera de slide, junto a la huella chica, o como etiqueta de campo/columna.",
+      "Don't traer al sitio público los colores `chilo.*`, Inter ni las utilidades `glass`/`animate-gradient`/`animate-float` del admin y el login."
+    ]
+  }
+}

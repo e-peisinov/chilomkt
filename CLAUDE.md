@@ -4,7 +4,8 @@
 - **UI**: Livewire Flux (instalado), componentes Blade
 - **Auth**: Laravel Breeze (Livewire edition). El registro NO es publico: la ruta `register` esta detras del middleware `auth` (solo un admin logueado crea usuarios). `register` no cambia la sesion del admin; `login`/`register` redirigen a `inicio`.
 - **DB**: MySQL (base: `chilomkt`, XAMPP local)
-- **Build**: Vite
+- **Build**: Vite. Entradas: `app.css`, `app.js` (admin y publico) y `publica.js` (solo sitio publico).
+- **Movimiento (sitio publico)**: GSAP 3 + ScrollTrigger + Lenis por npm (sin CDN). Ver seccion "Sitio publico: marca CHILO".
 
 ## Convencion de Nombres
 **Todo en espanol**: tablas, modelos, vistas, componentes, rutas, propiedades.
@@ -70,9 +71,18 @@ El sitio debe funcionar en todos los dispositivos. Patrones a respetar:
 - **Sidebar admin**: drawer Alpine en movil (`fixed`, `-translate-x-full` / `translate-x-0`), `lg:sticky lg:translate-x-0` en desktop, con overlay y boton cerrar. El boton hamburguesa usa `@click="sidebarOpen = true"`.
 - **Tablas admin**: SIEMPRE envolver en `<div class="overflow-x-auto">` + `<table class="w-full min-w-[600px]">` para evitar corte en pantallas chicas.
 - **Nunca usar clases Tailwind dinamicas** con valores variables (`grid-cols-{{ count(...) }}`): el JIT no las compila. Usar clases fijas responsivas (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`) o `flex flex-wrap`.
-- **`overflow-x-hidden`** en el body de `layouts/publica` como red de seguridad contra scroll horizontal de los blobs decorativos con offsets negativos.
+- **`overflow-x: clip`** en el body de `layouts/publica` (clase `.sitio`) como red de seguridad contra scroll horizontal de las letras caladas y la huella con offsets negativos. Es `clip` y no `hidden` para que las escenas `sticky` sigan funcionando.
 - **`[x-cloak]{display:none!important}`** definido en `resources/css/app.css` (necesario para que `x-cloak` funcione y no haya parpadeo de menus al cargar).
 - Heros internos usan `py-24 sm:py-32 lg:py-40`. Imagenes con alto fijo escalonan con breakpoints (ej. `h-72 sm:h-96 lg:h-[450px]`). Grids dentro de modales colapsan en movil (`grid-cols-1 sm:grid-cols-2`).
 
 ## Secciones CMS (tabla `secciones`)
 Claves existentes: `hero`, `inicio_estadisticas`, `servicios_intro`, `clientes_intro`, `inicio_proceso`, `inicio_cta`, `nosotros_hero`, `nosotros_historia`, `nosotros_estadisticas`, `mision`, `vision`, `nosotros_valores`, `nosotros_equipo_intro`, `nosotros_cta`, `servicios_hero`, `servicios_cta`, `contacto_hero`, `contacto_cta`
+
+## Sitio publico: marca CHILO (rediseño oct 2026)
+- Basado en los carruseles de Instagram @chilo.mkt. Contrato de direccion en `.impeccable/surfaces/resources-views-layouts-publica-blade-php.md`; contexto en `PRODUCT.md`.
+- **Paleta** (tailwind): `negro` #121212, `hueso` #E2E1DC, `amarillo` #FFB43A, `petroleo` #124D47. Cada seccion es un "slide" con clase `fondo-negro|hueso|amarillo|petroleo` (definen `--remate`, `--trazo`, `--calado`, `--suave`; estan en safelist).
+- **Tipografias** (@fontsource, servidas locales): `font-anton` (titulos), `font-pincel` Kaushan Script (remates manuscritos), `font-texto` Hanken Grotesk. Aproximadas hasta recibir el manual de marca.
+- **Convencion CMS**: en titulos y textos, lo que va entre `*asteriscos*` se muestra como remate manuscrito (`App\Support\Marca::remate()`). En la descripcion de un servicio, la primera linea es el titular del slide y el resto el texto (`Marca::partir()`). El `icono` del servicio elige la grafica: `estrategia`, `redes`, `audiovisual`, `diseno`.
+- **Componentes** `resources/views/components/publica/`: huella (logo SVG, centro del punto = 0,0), titular, cabecera (rotulo + huella chica), cinta, sticker, boton, pictograma, marca (logo configurable), cierre (CTA de cada pagina), icono.
+- **JS**: `resources/js/publica/movimiento.js` (Lenis + ciclo con wire:navigate, `?captura` o reduced-motion = sin movimiento) y `escenas.js` (escenas por `data-*`: `data-escena="huella|carrusel"`, `data-cinta`, `data-pega`, `data-paralaje`, `data-rearma`, `data-metodo-fila`, `data-feed`, `data-entra`, `data-dibuja`, `data-gira`, `data-timecode`). Las escenas fijadas usan sticky (clase `.movimiento` en `<html>`), no `pin`.
+- Contenido alineado con `database/seeders/MarcaChiloSeeder.php` (idempotente; desactiva servicios viejos, no borra). Respaldo del contenido anterior: `storage/app/respaldo-contenido-2026-10-19.json`.

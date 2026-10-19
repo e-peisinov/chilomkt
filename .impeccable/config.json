@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "resources/css/app.css"
+        ],
+        "createdAt": "2026-10-19T16:36:03.103Z",
+        "reason": "Claude: esquinas en L del visor REC (spans de 2.25rem con dos bordes), no un borde lateral de tarjeta"
+      }
+    ]
+  }
+}
