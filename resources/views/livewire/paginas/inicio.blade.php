@@ -1,264 +1,208 @@
+@use('App\Support\Marca')
+@php
+    $whatsapp = App\Models\Configuracion::obtener('whatsapp');
+    // Cada servicio toma la gráfica y el fondo de su slide en Instagram.
+    $tipos = ['estrategia', 'redes', 'audiovisual', 'diseno'];
+    $fondos = ['estrategia' => 'hueso', 'redes' => 'negro', 'audiovisual' => 'petroleo', 'diseno' => 'negro'];
+    $coloresCinta = ['hueso', 'petroleo', 'negro', 'hueso'];
+    $n = $servicios->count();
+    // Slides de la página para el contador del hero: hero, qué hacemos, servicios, método, trabajos y cierre.
+    $slides = 3 + ($n ? 1 : 0) + (count($pasos) ? 1 : 0) + ($clientes->count() ? 1 : 0);
+@endphp
 <div>
-    {{-- Hero Section --}}
-    <section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
-        {{-- Decorative floating elements --}}
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-chilo/20 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-chilo-light/15 rounded-full blur-3xl animate-float-delay"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-chilo-dark/30 rounded-full blur-3xl"></div>
-            {{-- Grid pattern --}}
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
-            {{-- Floating icons --}}
-            <div class="absolute top-32 right-20 text-white/10 animate-float-slow hidden lg:block">
-                <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/></svg>
+    {{-- Hero: la cámara entra por la huella hasta el punto amarillo. --}}
+    <section data-escena="huella" class="fondo-negro relative">
+        <div data-escenario class="relative min-h-svh overflow-hidden flex flex-col">
+            <div data-huella class="absolute pointer-events-none text-petroleo aspect-square
+                        w-[135vw] -mt-[67.5vw] top-[34%] left-[18vw]
+                        sm:w-[96vw] sm:-mt-[48vw] sm:top-[42%] sm:left-[34vw]
+                        lg:w-[min(112vh,80vw)] lg:-mt-[min(56vh,40vw)] lg:top-1/2 lg:left-[47vw]">
+                <x-publica.huella class="w-full h-full" />
             </div>
-            <div class="absolute bottom-40 left-20 text-white/10 animate-float hidden lg:block">
-                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-            </div>
-            <div class="absolute top-1/3 left-1/4 text-white/10 animate-float-delay hidden lg:block">
-                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+
+            <div class="relative z-10 flex-1 flex flex-col max-w-7xl w-full mx-auto px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 pb-8">
+
+                <div class="mt-auto pt-16 max-w-4xl">
+                    <x-publica.titular como="h1" :texto="$hero?->titulo ?: 'Que tu negocio se vea, se elija *y crezca.*'"
+                                       data-hero-sale class="text-[clamp(3rem,min(8.4vw,12.5vh),7.6rem)]" />
+                    @if($hero?->subtitulo)
+                        <p data-hero-sale class="mt-6 max-w-xl text-lg lg:text-xl leading-relaxed texto-suave">{{ $hero->subtitulo }}</p>
+                    @endif
+                    <div data-hero-sale class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-5">
+                        @if($whatsapp)
+                            <x-publica.boton :href="Marca::whatsapp($whatsapp, 'Hola CHILO! Quiero contarles de mi marca.')" externo>
+                                <x-publica.icono nombre="whatsapp" /> Escribinos por WhatsApp
+                            </x-publica.boton>
+                        @else
+                            <x-publica.boton href="/contacto">Escribinos <x-publica.icono nombre="flecha" /></x-publica.boton>
+                        @endif
+                        <a href="#que-hacemos" class="enlace font-semibold text-lg">Ver qué hacemos</a>
+                    </div>
+                </div>
+
+                <div data-hero-fijo class="mt-10 pt-5 border-t border-hueso/15 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+                    @if(count($estadisticas))
+                        <ul class="flex flex-wrap gap-x-8 gap-y-3">
+                            @foreach($estadisticas as $est)
+                                <li class="flex items-baseline gap-2.5">
+                                    <span class="font-anton text-2xl text-amarillo cifras">{{ $est['valor'] }}</span>
+                                    <span class="texto-suave text-sm">{{ $est['etiqueta'] }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <p class="rotulo texto-suave inline-flex items-center gap-3"><span class="cifras">1/{{ $slides }}</span> Deslizá <x-publica.icono nombre="abajo" class="w-4 h-4" /></p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-20">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                {{-- Text --}}
-                <div>
-                    <div class="animate-fade-down">
-                        <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium px-4 py-2 rounded-full mb-6">
-                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                            Agencia de Marketing Digital
-                        </span>
-                    </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-white mb-6 animate-fade-up">
-                        {{ $hero?->titulo ?? 'Estrategia, hábitos y crecimiento real para tu negocio' }}
-                    </h1>
-                    <p class="text-lg md:text-xl text-white/70 max-w-xl mb-8 animate-fade-up delay-200">
-                        {{ $hero?->subtitulo ?? '' }}
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-up delay-300">
-                        <a href="/contacto" wire:navigate class="group bg-white text-chilo-dark px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all duration-300 text-center">
-                            Quiero crecer mi negocio
-                            <span class="inline-block ml-1 group-hover:translate-x-1 transition-transform">&rarr;</span>
-                        </a>
-                        <a href="/servicios" wire:navigate class="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-center backdrop-blur-sm">
-                            Ver servicios
-                        </a>
-                    </div>
+    {{-- Qué hacemos: el punto amarillo del hero se vuelve este fondo. --}}
+    <section id="que-hacemos" class="fondo-amarillo relative overflow-hidden">
+        <div aria-hidden="true" class="absolute -right-16 top-24 sm:right-0 lg:right-10 w-[22rem] sm:w-[28rem] lg:w-[34rem] pointer-events-none" data-paralaje="y:-25">
+            <svg viewBox="0 0 100 100" class="w-full" fill="none" stroke="var(--calado)" stroke-width=".6">
+                <path d="M36 4h28v32h32v28H64v32H36V64H4V36h32z"/>
+            </svg>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-24 sm:pt-28 lg:pb-32">
+            <x-publica.cabecera rotulo="Qué ofrecemos" />
+            <div class="mt-16 sm:mt-24 lg:mt-28 max-w-4xl">
+                <x-publica.titular :texto="$serviciosIntro?->titulo ?: 'Lo que hacemos *por tu marca*'" class="text-[clamp(3.2rem,9vw,8rem)]" />
+                @if($serviciosIntro?->subtitulo)
+                    <p class="mt-7 max-w-xl text-lg sm:text-xl leading-relaxed texto-suave">{{ $serviciosIntro->subtitulo }}</p>
+                @endif
+            </div>
+            <ul class="mt-12 flex flex-wrap gap-x-5 gap-y-6 text-xl sm:text-2xl lg:text-3xl" aria-label="Servicios">
+                @foreach($servicios as $i => $servicio)
+                    <li data-pega><x-publica.cinta :color="$coloresCinta[$i % 4]" :giro="$i % 2 ? 'der' : 'izq'">{{ $servicio->titulo }}</x-publica.cinta></li>
+                @endforeach
+            </ul>
+        </div>
+    </section>
 
-                    {{-- Stats mini --}}
-                    @if(count($estadisticas) > 0)
-                    <div class="flex flex-row flex-wrap gap-8 mt-12 animate-fade-up delay-500">
-                        @foreach($estadisticas as $est)
-                        <div>
-                            <p class="text-3xl font-black text-white">{{ $est['valor'] }}</p>
-                            <p class="text-white/50 text-sm">{{ $est['etiqueta'] }}</p>
+    {{-- Servicios como carrusel: con movimiento la pista se desliza en horizontal; sin él, slides apilados. --}}
+    @if($n)
+        <section data-escena="carrusel" style="--n: {{ $n }}" class="relative bg-negro" aria-label="Servicios">
+            <div data-escenario class="relative">
+                <div data-pista class="flex flex-col">
+                    @foreach($servicios as $i => $servicio)
+                        @php
+                            [$titularServicio, $textoServicio] = Marca::partir($servicio->descripcion);
+                            $tipo = in_array($servicio->icono, $tipos, true) ? $servicio->icono : $tipos[$i % 4];
+                        @endphp
+                        <article data-slide class="fondo-{{ $fondos[$tipo] }} relative min-h-svh flex flex-col">
+                            <div class="flex-1 flex flex-col max-w-7xl w-full mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-8">
+                                <x-publica.cabecera :rotulo="$servicio->titulo" />
+                                <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 content-center items-center py-6">
+                                    <div class="lg:col-span-5 lg:order-2 w-[44%] sm:w-[40%] lg:w-full max-w-sm lg:max-w-md ml-auto">
+                                        @if($servicio->imagen)
+                                            <div class="visor relative aspect-square p-3 text-[color:var(--trazo)]">
+                                                <i></i><i></i><i></i><i></i>
+                                                <img src="{{ asset('storage/'.$servicio->imagen) }}" alt="{{ $servicio->titulo }}" loading="lazy" class="w-full h-full object-cover">
+                                            </div>
+                                        @else
+                                            <x-publica.pictograma :tipo="$tipo" />
+                                        @endif
+                                    </div>
+                                    <div data-slide-texto class="lg:col-span-7 lg:order-1">
+                                        <x-publica.titular como="h3" :texto="$titularServicio ?: $servicio->titulo" class="text-[clamp(2.6rem,6.6vw,6.2rem)]" />
+                                        @if($textoServicio)
+                                            <p class="mt-6 max-w-lg text-lg sm:text-xl leading-relaxed texto-suave">{{ $textoServicio }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between gap-4 text-sm">
+                                    <span class="cifras font-semibold texto-suave">{{ $i + 1 }}/{{ $n }}</span>
+                                    <span class="flex gap-1.5" aria-hidden="true">
+                                        @for($j = 0; $j < $n; $j++)
+                                            <span class="w-2 h-2 rounded-full border border-current {{ $j === $i ? 'bg-current' : 'opacity-50' }}"></span>
+                                        @endfor
+                                    </span>
+                                    <span class="rotulo texto-suave inline-flex items-center gap-2">@if($i + 1 < $n) Deslizá <x-publica.icono nombre="flecha" class="w-4 h-4" /> @else ¿Arrancamos? @endif</span>
+                                </div>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    {{-- Cintas de texto que corren con el scroll. --}}
+    @php $frase = $servicios->pluck('titulo')->push('Foto')->push('Video')->push('Drone')->map(fn ($t) => mb_strtoupper($t))->join(' · '); @endphp
+    <section class="fondo-negro py-14 sm:py-20 overflow-hidden" aria-hidden="true">
+        <p data-cinta="-1" class="titular whitespace-nowrap text-[clamp(3rem,9vw,8rem)] text-amarillo">{{ $frase }} · {{ $frase }}</p>
+        <p data-cinta="1" class="calado whitespace-nowrap text-[clamp(3rem,9vw,8rem)] mt-2 -ml-[30%]">{{ $frase }} · {{ $frase }}</p>
+    </section>
+
+    {{-- Método --}}
+    @if(count($pasos))
+        <section id="metodo" class="fondo-hueso relative overflow-hidden">
+            <p aria-hidden="true" data-paralaje="x:-14" class="calado absolute -top-6 right-0 translate-x-[18%] text-[42vw] lg:text-[30rem] pointer-events-none">Plan</p>
+            <div class="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-24 sm:pt-28 lg:pb-32">
+                <x-publica.cabecera rotulo="Cómo trabajamos" />
+                <div class="mt-24 sm:mt-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+                    <div class="{{ $procesoSeccion?->imagen ? 'lg:col-span-7' : 'lg:col-span-10' }}">
+                        <x-publica.titular :texto="$procesoSeccion?->titulo ?: 'Método antes que *improvisación*'" class="text-[clamp(3rem,8vw,7rem)]" />
+                        @if($procesoSeccion?->subtitulo)
+                            <p class="mt-7 max-w-xl text-lg sm:text-xl leading-relaxed texto-suave">{{ $procesoSeccion->subtitulo }}</p>
+                        @endif
+                    </div>
+                    @if($procesoSeccion?->imagen)
+                        <div class="lg:col-span-5 visor relative p-3 text-petroleo">
+                            <i></i><i></i><i></i><i></i>
+                            <img src="{{ asset('storage/'.$procesoSeccion->imagen) }}" alt="{{ strip_tags(str_replace('*', '', $procesoSeccion->titulo)) }}" loading="lazy" class="w-full h-72 sm:h-96 object-cover">
                         </div>
-                        @endforeach
-                    </div>
                     @endif
                 </div>
 
-                {{-- Hero image collage --}}
-                <div class="relative hidden lg:block animate-fade-in delay-300">
-                    <div class="relative">
-                        {{-- Main image --}}
-                        <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/30 rotate-2 hover:rotate-0 transition-transform duration-500">
-                            <img src="{{ $hero?->imagen ? asset('storage/' . $hero->imagen) : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop' }}" alt="Marketing Digital" class="w-full h-80 object-cover">
-                        </div>
-                        {{-- Overlapping card --}}
-                        <div class="absolute -bottom-8 -left-8 glass rounded-2xl p-4 shadow-xl animate-float-slow">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-                                </div>
-                                <div>
-                                    <p class="text-white font-bold text-sm">+340% Engagement</p>
-                                    <p class="text-white/60 text-xs">Último trimestre</p>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Second floating card --}}
-                        <div class="absolute -top-4 -right-4 glass rounded-2xl p-3 shadow-xl animate-float-delay">
-                            <div class="flex items-center gap-2">
-                                <div class="flex -space-x-2">
-                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop" class="w-8 h-8 rounded-full border-2 border-white/30" alt="">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop" class="w-8 h-8 rounded-full border-2 border-white/30" alt="">
-                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop" class="w-8 h-8 rounded-full border-2 border-white/30" alt="">
-                                </div>
-                                <p class="text-white text-xs font-medium">+50 clientes felices</p>
-                            </div>
-                        </div>
-                    </div>
+                <ol class="mt-16 border-t-2 border-negro">
+                    @foreach($pasos as $paso)
+                        <li data-metodo-fila class="relative grid grid-cols-1 sm:grid-cols-12 gap-x-8 gap-y-3 items-center py-7 sm:py-9">
+                            <span data-regla aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-negro"></span>
+                            <h3 data-paso class="sm:col-span-6 titular text-[clamp(2.6rem,6.4vw,5.6rem)]">{{ $paso['titulo'] }}</h3>
+                            <p class="sm:col-span-6 sm:text-right text-lg leading-relaxed texto-suave [&_.remate]:block [&_.remate]:text-[2rem] sm:[&_.remate]:text-[2.6rem] [&_.remate]:mb-2 [&_.remate]:-rotate-3">{{ Marca::remate($paso['descripcion'] ?? '') }}</p>
+                        </li>
+                    @endforeach
+                </ol>
+            </div>
+        </section>
+    @endif
+
+    {{-- Trabajos: base del futuro portfolio, sobre los clientes del CMS. --}}
+    @if($clientes->count())
+        @php $fondosFeed = ['amarillo', 'petroleo', 'hueso']; @endphp
+        <section id="trabajos" class="fondo-negro relative">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-24 sm:pt-28 lg:pb-32">
+                <x-publica.cabecera rotulo="Trabajos" />
+                <div class="mt-24 sm:mt-32 max-w-4xl">
+                    <x-publica.titular :texto="$clientesIntro?->titulo ?: 'Marcas que *se animaron*'" class="text-[clamp(3rem,8vw,7rem)]" />
+                    @if($clientesIntro?->subtitulo)
+                        <p class="mt-7 max-w-xl text-lg sm:text-xl leading-relaxed texto-suave">{{ $clientesIntro->subtitulo }}</p>
+                    @endif
                 </div>
+                <ul data-feed class="mt-14 grid grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2">
+                    @foreach($clientes as $i => $cliente)
+                        <li class="fondo-{{ $fondosFeed[($i + intdiv($i, 3)) % 3] }} relative aspect-square overflow-hidden group">
+                            @if($cliente->logo)
+                                <img src="{{ asset('storage/'.$cliente->logo) }}" alt="{{ $cliente->nombre }}" loading="lazy" class="absolute inset-0 w-full h-full object-contain p-[18%]">
+                            @else
+                                <p class="absolute inset-0 flex items-center justify-center p-5 text-center titular text-[clamp(1.6rem,4.4vw,3.4rem)]">{{ $cliente->nombre }}</p>
+                            @endif
+                            @if($cliente->descripcion)
+                                <p class="absolute left-3 bottom-3 right-3 sm:left-5 sm:bottom-5 text-xs sm:text-sm font-semibold texto-suave">{{ $cliente->descripcion }}</p>
+                            @endif
+                            @if($cliente->sitio_web)
+                                <a href="{{ $cliente->sitio_web }}" target="_blank" rel="noopener" class="absolute inset-0" aria-label="Ver {{ $cliente->nombre }}">
+                                    <span class="absolute top-3 right-3 sm:top-5 sm:right-5 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity"><x-publica.icono nombre="flecha" class="w-6 h-6 -rotate-45" /></span>
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
+        </section>
+    @endif
 
-        {{-- Scroll indicator --}}
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-                <div class="w-1.5 h-3 bg-white/60 rounded-full animate-pulse"></div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Servicios Section --}}
-    <section class="py-24 bg-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-chilo-light/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="text-center mb-16" data-animate="fade-up">
-                <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Lo que hacemos</span>
-                <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-                    {{ $serviciosIntro?->titulo ?? 'Nuestros Servicios' }}
-                </h2>
-                <p class="text-gray-500 max-w-2xl mx-auto text-lg">
-                    {{ $serviciosIntro?->subtitulo ?? '' }}
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($servicios as $i => $servicio)
-                    <div data-animate="fade-up" data-delay="{{ $i * 0.1 }}s" class="group bg-white rounded-2xl p-7 border border-gray-100 hover:border-chilo-light/50 hover:shadow-xl hover:shadow-chilo/10 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
-                        {{-- Hover gradient overlay --}}
-                        <div class="absolute inset-0 bg-gradient-to-br from-chilo-dark to-chilo opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-
-                        <div class="relative z-10">
-                            <div class="w-14 h-14 bg-gradient-to-br from-chilo-light/30 to-chilo/20 group-hover:from-white/20 group-hover:to-white/10 rounded-2xl flex items-center justify-center mb-5 transition-colors duration-500">
-                                @switch($servicio->icono)
-                                    @case('share')
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-                                        @break
-                                    @case('megaphone')
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-                                        @break
-                                    @case('globe')
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-                                        @break
-                                    @case('brain')
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                        @break
-                                    @case('envelope')
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                        @break
-                                    @case('palette')
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
-                                        @break
-                                    @default
-                                        <svg class="w-7 h-7 text-chilo-dark group-hover:text-white transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                @endswitch
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-white mb-3 transition-colors duration-500">{{ $servicio->titulo }}</h3>
-                            <p class="text-gray-500 group-hover:text-white/80 text-sm leading-relaxed transition-colors duration-500">{{ $servicio->descripcion }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="text-center mt-12" data-animate="fade-up">
-                <a href="/servicios" wire:navigate class="inline-flex items-center gap-2 text-chilo-dark font-bold hover:gap-3 transition-all duration-300">
-                    Ver todos los servicios
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    {{-- Social Proof / Clientes Section --}}
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
-        <div class="absolute bottom-0 left-0 w-72 h-72 bg-chilo/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="text-center mb-16" data-animate="fade-up">
-                <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Confianza comprobada</span>
-                <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-                    {{ $clientesIntro?->titulo ?? 'Clientes que confían en nosotros' }}
-                </h2>
-                <p class="text-gray-500 max-w-2xl mx-auto text-lg">
-                    {{ $clientesIntro?->subtitulo ?? '' }}
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                @foreach($clientes as $i => $cliente)
-                    <div data-animate="scale" data-delay="{{ $i * 0.08 }}s" class="group bg-white rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:shadow-xl hover:shadow-chilo/10 hover:-translate-y-1 transition-all duration-400 border border-gray-100 hover:border-chilo-light/40">
-                        @if($cliente->logo)
-                            <img src="{{ asset('storage/' . $cliente->logo) }}" alt="{{ $cliente->nombre }}" class="h-12 mb-3 object-contain grayscale group-hover:grayscale-0 transition-all duration-500">
-                        @else
-                            <div class="w-16 h-16 bg-gradient-to-br from-chilo-light/30 to-chilo/20 group-hover:from-chilo-dark group-hover:to-chilo rounded-2xl flex items-center justify-center mb-3 transition-all duration-500">
-                                <span class="text-chilo-dark group-hover:text-white font-black text-lg transition-colors duration-500">{{ mb_substr($cliente->nombre, 0, 2) }}</span>
-                            </div>
-                        @endif
-                        <h4 class="font-bold text-sm text-gray-700 group-hover:text-chilo-dark transition-colors">{{ $cliente->nombre }}</h4>
-                        @if($cliente->descripcion)
-                            <p class="text-xs text-gray-400 mt-1">{{ $cliente->descripcion }}</p>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- Process / How we work --}}
-    <section class="py-24 bg-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div data-animate="slide-right">
-                    <span class="inline-block bg-chilo-light/20 text-chilo-dark text-sm font-semibold px-4 py-1.5 rounded-full mb-4">{{ $procesoSeccion?->subtitulo ?? 'Cómo trabajamos' }}</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">{{ $procesoSeccion?->titulo ?? 'Un proceso pensado para resultados reales' }}</h2>
-                    <div class="space-y-6">
-                        @foreach($pasos as $paso)
-                            <div class="flex gap-4 group">
-                                <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center text-white font-black text-sm group-hover:scale-110 transition-transform duration-300">
-                                    {{ $paso['num'] }}
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-900 mb-1">{{ $paso['titulo'] }}</h3>
-                                    <p class="text-gray-500 text-sm">{{ $paso['descripcion'] }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div data-animate="slide-left" class="relative">
-                    <div class="rounded-2xl overflow-hidden shadow-2xl shadow-chilo/20">
-                        <img src="{{ $procesoSeccion?->imagen ? asset('storage/' . $procesoSeccion->imagen) : 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=500&fit=crop' }}" alt="Equipo trabajando en estrategia" class="w-full h-80 sm:h-96 lg:h-[500px] object-cover">
-                    </div>
-                    <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-gray-100" data-animate="scale" data-delay="0.4s">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-900">+150 proyectos</p>
-                                <p class="text-sm text-gray-500">completados con éxito</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- CTA Section --}}
-    <section class="py-24 bg-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-chilo-light/10 to-chilo/5"></div>
-
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative" data-animate="fade-up">
-            <div class="bg-gradient-to-br from-chilo-dark via-chilo to-chilo-light rounded-3xl p-12 md:p-16 relative overflow-hidden">
-                {{-- Decorative --}}
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
-                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
-
-                <div class="relative z-10">
-                    <h2 class="text-3xl md:text-5xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? '¿Listo para el próximo nivel?' }}</h2>
-                    <p class="text-white/80 text-lg mb-8 max-w-xl mx-auto">{{ $ctaSeccion?->subtitulo ?? 'Agenda una consulta gratuita y descubrí cómo podemos transformar tu marca con estrategia y mentalidad.' }}</p>
-                    <a href="/contacto" wire:navigate class="inline-flex items-center gap-2 bg-white text-chilo-dark px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-1 transition-all duration-300 text-lg">
-                        {{ $ctaSeccion?->contenido ?? 'Empecemos ahora' }}
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-publica.cierre :seccion="$ctaSeccion" />
 </div>

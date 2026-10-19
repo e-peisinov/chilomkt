@@ -27,6 +27,21 @@ class Contacto extends Component
         ];
     }
 
+    protected function messages()
+    {
+        return [
+            'nombre.required' => 'Contanos cómo te llamás.',
+            'nombre.min' => 'El nombre es muy corto.',
+            'telefono.required' => 'Dejanos un teléfono para responderte.',
+            'email.email' => 'Revisá el email: parece que le falta algo.',
+            'asunto.required' => 'Poné un asunto, aunque sea corto.',
+            'asunto.min' => 'El asunto es muy corto.',
+            'mensaje.required' => 'Contanos un poco de tu marca.',
+            'mensaje.min' => 'Contanos un poco más (al menos 10 caracteres).',
+            '*.max' => 'Es demasiado largo.',
+        ];
+    }
+
     public function enviar()
     {
         $this->validate();
@@ -51,6 +66,6 @@ class Contacto extends Component
             'telefonoContacto' => Configuracion::obtener('telefono'),
             'direccionContacto' => Configuracion::obtener('direccion'),
             'whatsapp' => Configuracion::obtener('whatsapp'),
-        ])->layout('layouts.publica', ['titulo' => 'Contacto - ChiloMkt']);
+        ])->layout('layouts.publica', ['titulo' => 'Contacto · CHILO']);
     }
 }

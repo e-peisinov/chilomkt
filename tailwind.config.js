@@ -9,10 +9,17 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    // Los fondos de slide se eligen por dato (fondo-{{ $color }}): se generan siempre.
+    safelist: [{ pattern: /^fondo-(negro|hueso|amarillo|petroleo)$/ }],
+
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Inter', 'Figtree', ...defaultTheme.fontFamily.sans],
+                // Sitio público (marca CHILO, oct 2026)
+                anton: ['Anton', 'Impact', 'sans-serif'],
+                pincel: ['"Kaushan Script"', 'cursive'],
+                texto: ['"Hanken Grotesk Variable"', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 chilo: {
@@ -20,6 +27,11 @@ export default {
                     DEFAULT: '#7c959c',
                     dark: '#1f526b',
                 },
+                // Paleta de la marca CHILO (sitio público)
+                negro: '#121212',
+                hueso: '#E2E1DC',
+                amarillo: '#FFB43A',
+                petroleo: '#124D47',
             },
         },
     },

@@ -14,6 +14,6 @@ class Servicios extends Component
             'servicios' => Servicio::activos()->get(),
             'heroSeccion' => Seccion::obtener('servicios_hero'),
             'ctaSeccion' => Seccion::obtener('servicios_cta'),
-        ])->layout('layouts.publica', ['titulo' => 'Servicios - ChiloMkt']);
+        ])->layout('layouts.publica', ['titulo' => 'Servicios · CHILO']);
     }
 }

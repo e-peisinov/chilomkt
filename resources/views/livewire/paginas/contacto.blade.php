@@ -1,111 +1,126 @@
+@use('App\Support\Marca')
+@php
+    $instagram = App\Models\Configuracion::obtener('instagram');
+    $campo = 'block w-full rounded-none border-2 border-negro bg-transparent px-4 py-3.5 text-lg text-negro placeholder:text-negro/70 focus:border-petroleo focus:ring-0 transition-colors';
+@endphp
 <div>
-    {{-- Hero --}}
-    <section class="relative py-24 sm:py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 right-20 w-72 h-72 bg-chilo/20 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute bottom-10 left-10 w-96 h-96 bg-chilo-light/15 rounded-full blur-3xl animate-float-delay"></div>
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+    {{-- Escribinos y lo charlamos. --}}
+    <section class="fondo-negro relative overflow-hidden">
+        <div aria-hidden="true" class="absolute -right-[30vw] sm:-right-[16vw] lg:-right-40 top-1/2 -translate-y-1/2 w-[90vw] sm:w-[70vw] lg:w-[46rem] text-petroleo pointer-events-none">
+            <span data-rearma class="block"><x-publica.huella class="w-full h-auto" /></span>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium px-4 py-2 rounded-full mb-6 animate-fade-down">
-                Escribinos
-            </span>
-            <h1 class="text-4xl md:text-6xl font-black text-white mb-6 animate-fade-up">{{ $hero?->titulo ?? 'Contactanos' }}</h1>
-            <p class="text-xl text-white/70 max-w-2xl mx-auto animate-fade-up delay-200">{{ $hero?->subtitulo ?? '' }}</p>
+        <div class="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-20 sm:pt-28 lg:pb-28 min-h-[80svh] flex flex-col">
+            <x-publica.cabecera rotulo="¿Y vos?" />
+            <x-publica.sticker data-pega color="amarillo" class="self-end mt-10 sm:mt-6 lg:mr-24 w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 text-2xl sm:text-3xl">escribinos</x-publica.sticker>
+            <div class="mt-auto pt-10 max-w-4xl">
+                <x-publica.titular como="h1" :texto="$hero?->titulo ?: 'Escribinos y *lo charlamos*'" class="text-[clamp(3.4rem,min(10vw,15vh),8.6rem)]" />
+                @if($hero?->subtitulo)
+                    <p class="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed texto-suave">{{ $hero->subtitulo }}</p>
+                @endif
+            </div>
         </div>
     </section>
 
-    <section class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                {{-- Info de contacto --}}
-                <div class="lg:col-span-1 space-y-6" data-animate="slide-right">
-                    <div class="bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:shadow-chilo/10 transition-all duration-500 group border border-gray-100">
-                        <div class="w-12 h-12 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        </div>
-                        <h3 class="font-bold text-gray-900 mb-1">Email</h3>
-                        <p class="text-gray-500">{{ $emailContacto }}</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:shadow-chilo/10 transition-all duration-500 group border border-gray-100">
-                        <div class="w-12 h-12 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                        </div>
-                        <h3 class="font-bold text-gray-900 mb-1">Teléfono</h3>
-                        <p class="text-gray-500">{{ $telefonoContacto }}</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:shadow-chilo/10 transition-all duration-500 group border border-gray-100">
-                        <div class="w-12 h-12 bg-gradient-to-br from-chilo-dark to-chilo rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        </div>
-                        <h3 class="font-bold text-gray-900 mb-1">Ubicación</h3>
-                        <p class="text-gray-500">{{ $direccionContacto }}</p>
-                    </div>
-                    @if($whatsapp)
-                        <a href="https://wa.me/{{ $whatsapp }}" target="_blank" class="flex items-center justify-center gap-3 bg-green-500 text-white px-6 py-4 rounded-2xl font-bold hover:bg-green-600 hover:shadow-lg hover:shadow-green-500/30 hover:-translate-y-1 transition-all duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                            Escribinos por WhatsApp
-                        </a>
-                    @endif
-                </div>
+    <section class="fondo-hueso relative">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-24 sm:pt-24 lg:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12">
+            {{-- Por dónde escribirnos --}}
+            <div class="lg:col-span-5">
+                @if($whatsapp)
+                    <a href="{{ Marca::whatsapp($whatsapp, 'Hola CHILO! Quiero contarles de mi marca.') }}" target="_blank" rel="noopener"
+                       class="group block fondo-negro p-7 sm:p-8">
+                        <span class="flex items-center justify-between gap-6">
+                            <x-publica.icono nombre="whatsapp" class="w-9 h-9 text-amarillo" />
+                            <x-publica.icono nombre="flecha" class="w-7 h-7 transition-transform duration-300 group-hover:translate-x-1.5" />
+                        </span>
+                        <span class="mt-10 block titular text-[clamp(2.4rem,5vw,3.6rem)]">Escribinos por <span class="remate">WhatsApp</span></span>
+                        <span class="mt-3 block texto-suave">Te contestamos nosotros, no un bot.</span>
+                    </a>
+                @endif
 
-                {{-- Formulario --}}
-                <div class="lg:col-span-2" data-animate="slide-left">
-                    @if($enviado)
-                        <div class="bg-green-50 border border-green-200 rounded-3xl p-12 text-center" data-animate="scale">
-                            <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            </div>
-                            <h3 class="text-2xl font-black text-green-800 mb-3">Mensaje enviado</h3>
-                            <p class="text-green-600 text-lg">Gracias por contactarnos. Te responderemos a la brevedad.</p>
-                        </div>
-                    @else
-                        <div class="bg-gray-50 rounded-3xl p-8 md:p-10 border border-gray-100">
-                            <h2 class="text-2xl font-black text-gray-900 mb-6">Enviar mensaje</h2>
-                            <form wire:submit="enviar" class="space-y-5">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div>
-                                        <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">Nombre *</label>
-                                        <input wire:model="nombre" type="text" id="nombre" placeholder="Tu nombre" class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
-                                        @error('nombre') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div>
-                                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                                        <input wire:model="email" type="email" id="email" placeholder="tu@email.com" class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
-                                        @error('email') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div>
-                                        <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">Teléfono *</label>
-                                        <input wire:model="telefono" type="text" id="telefono" placeholder="+54 9 11 ..." class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
-                                        @error('telefono') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div>
-                                        <label for="asunto" class="block text-sm font-semibold text-gray-700 mb-2">Asunto *</label>
-                                        <input wire:model="asunto" type="text" id="asunto" placeholder="¿Sobre qué querés hablar?" class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors">
-                                        @error('asunto') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="mensaje" class="block text-sm font-semibold text-gray-700 mb-2">Mensaje *</label>
-                                    <textarea wire:model="mensaje" id="mensaje" rows="5" placeholder="Contanos sobre tu proyecto..." class="w-full rounded-xl border-gray-200 bg-white focus:border-chilo-dark focus:ring-chilo-dark px-4 py-3 transition-colors resize-none"></textarea>
-                                    @error('mensaje') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
-                                </div>
-                                <button type="submit" class="w-full md:w-auto bg-gradient-to-r from-chilo-dark to-chilo text-white px-10 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-chilo-dark/30 hover:-translate-y-0.5 transition-all duration-300" wire:loading.attr="disabled" wire:loading.class="opacity-70">
-                                    <span wire:loading.remove class="flex items-center justify-center gap-2">
-                                        Enviar mensaje
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                                    </span>
-                                    <span wire:loading class="flex items-center justify-center gap-2">
-                                        <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                        Enviando...
-                                    </span>
-                                </button>
-                            </form>
-                        </div>
+                <ul class="mt-12 border-t-2 border-negro">
+                    @if($emailContacto)
+                        <li class="border-b-2 border-negro">
+                            <a href="mailto:{{ $emailContacto }}" class="flex items-center gap-4 py-5 hover:text-petroleo transition-colors">
+                                <x-publica.icono nombre="mail" class="w-6 h-6 shrink-0" />
+                                <span class="text-lg font-semibold break-all">{{ $emailContacto }}</span>
+                            </a>
+                        </li>
                     @endif
-                </div>
+                    @if($telefonoContacto)
+                        <li class="border-b-2 border-negro">
+                            <a href="tel:{{ preg_replace('/[^\d+]/', '', $telefonoContacto) }}" class="flex items-center gap-4 py-5 hover:text-petroleo transition-colors">
+                                <x-publica.icono nombre="telefono" class="w-6 h-6 shrink-0" />
+                                <span class="cifras text-lg font-semibold">{{ $telefonoContacto }}</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if($instagram)
+                        <li class="border-b-2 border-negro">
+                            <a href="{{ $instagram }}" target="_blank" rel="noopener" class="flex items-center gap-4 py-5 hover:text-petroleo transition-colors">
+                                <x-publica.icono nombre="instagram" class="w-6 h-6 shrink-0" />
+                                <span class="text-lg font-semibold">{{ '@'.trim((string) parse_url($instagram, PHP_URL_PATH), '/') }} <span class="font-normal texto-suave">· también por DM</span></span>
+                            </a>
+                        </li>
+                    @endif
+                    @if($direccionContacto)
+                        <li class="border-b-2 border-negro flex items-center gap-4 py-5">
+                            <x-publica.icono nombre="lugar" class="w-6 h-6 shrink-0" />
+                            <span class="text-lg font-semibold">{{ $direccionContacto }}</span>
+                        </li>
+                    @endif
+                </ul>
+            </div>
+
+            {{-- Formulario --}}
+            <div class="lg:col-span-7 lg:pl-8">
+                @if($enviado)
+                    <div class="fondo-amarillo p-8 sm:p-12" role="status">
+                        <x-publica.titular texto="¡Llegó tu *mensaje!*" class="text-[clamp(2.8rem,6vw,4.8rem)]" />
+                        <p class="mt-6 text-lg texto-suave max-w-md">Gracias por escribirnos. Lo leemos y te respondemos a la brevedad.</p>
+                        <button type="button" wire:click="$set('enviado', false)" class="mt-8 enlace font-semibold text-lg">Enviar otro mensaje</button>
+                    </div>
+                @else
+                    <h2 class="titular text-[clamp(2.4rem,5vw,3.6rem)]">Contanos de <span class="remate">tu marca</span></h2>
+
+                    <form wire:submit="enviar" class="mt-10 space-y-7" novalidate>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                            <div>
+                                <label for="nombre" class="rotulo block mb-2.5">Nombre <span aria-hidden="true">*</span></label>
+                                <input wire:model="nombre" type="text" id="nombre" autocomplete="name" required placeholder="Cómo te llamás" class="{{ $campo }}" @error('nombre') aria-invalid="true" aria-describedby="error-nombre" @enderror>
+                                @error('nombre') <p id="error-nombre" class="mt-2 inline-block bg-negro text-amarillo text-sm font-semibold px-2.5 py-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label for="telefono" class="rotulo block mb-2.5">Teléfono <span aria-hidden="true">*</span></label>
+                                <input wire:model="telefono" type="tel" id="telefono" autocomplete="tel" required placeholder="+54 9 2324 ..." class="{{ $campo }}" @error('telefono') aria-invalid="true" aria-describedby="error-telefono" @enderror>
+                                @error('telefono') <p id="error-telefono" class="mt-2 inline-block bg-negro text-amarillo text-sm font-semibold px-2.5 py-1">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                            <div>
+                                <label for="email" class="rotulo block mb-2.5">Email</label>
+                                <input wire:model="email" type="email" id="email" autocomplete="email" placeholder="tu@email.com" class="{{ $campo }}" @error('email') aria-invalid="true" aria-describedby="error-email" @enderror>
+                                @error('email') <p id="error-email" class="mt-2 inline-block bg-negro text-amarillo text-sm font-semibold px-2.5 py-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label for="asunto" class="rotulo block mb-2.5">Asunto <span aria-hidden="true">*</span></label>
+                                <input wire:model="asunto" type="text" id="asunto" required placeholder="Redes, fotos, video…" class="{{ $campo }}" @error('asunto') aria-invalid="true" aria-describedby="error-asunto" @enderror>
+                                @error('asunto') <p id="error-asunto" class="mt-2 inline-block bg-negro text-amarillo text-sm font-semibold px-2.5 py-1">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+                        <div>
+                            <label for="mensaje" class="rotulo block mb-2.5">Mensaje <span aria-hidden="true">*</span></label>
+                            <textarea wire:model="mensaje" id="mensaje" rows="5" required placeholder="Qué hacés, a quién le hablás y qué te gustaría lograr." class="{{ $campo }} resize-y" @error('mensaje') aria-invalid="true" aria-describedby="error-mensaje" @enderror></textarea>
+                            @error('mensaje') <p id="error-mensaje" class="mt-2 inline-block bg-negro text-amarillo text-sm font-semibold px-2.5 py-1">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="flex flex-wrap items-center gap-x-6 gap-y-4 pt-2">
+                            <button type="submit" class="boton bg-negro text-hueso disabled:opacity-60" wire:loading.attr="disabled" wire:target="enviar">
+                                <span wire:loading.remove wire:target="enviar" class="inline-flex items-center gap-3">Enviar mensaje <x-publica.icono nombre="flecha" /></span>
+                                <span wire:loading wire:target="enviar">Enviando…</span>
+                            </button>
+                            <p class="text-sm texto-suave">* Obligatorio</p>
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
     </section>

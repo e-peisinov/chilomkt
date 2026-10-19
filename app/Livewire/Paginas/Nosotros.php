@@ -27,6 +27,6 @@ class Nosotros extends Component
             'valores' => $valoresSeccion ? json_decode($valoresSeccion->contenido, true) ?? [] : [],
             'equipoIntro' => $equipoIntro,
             'ctaSeccion' => $ctaSeccion,
-        ])->layout('layouts.publica', ['titulo' => 'Nosotros - ChiloMkt']);
+        ])->layout('layouts.publica', ['titulo' => 'Nosotros · CHILO']);
     }
 }

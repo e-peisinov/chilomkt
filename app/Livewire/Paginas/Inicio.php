@@ -25,6 +25,6 @@ class Inicio extends Component
             'procesoSeccion' => $procesoSeccion,
             'pasos' => $procesoSeccion ? json_decode($procesoSeccion->contenido, true) ?? [] : [],
             'ctaSeccion' => $ctaSeccion,
-        ])->layout('layouts.publica', ['titulo' => 'ChiloMkt - Marketing Digital & Mentalidad']);
+        ])->layout('layouts.publica', ['titulo' => 'CHILO · Estudio de marketing y contenido en Mercedes']);
     }
 }

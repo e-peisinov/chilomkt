@@ -1,93 +1,80 @@
+@use('App\Support\Marca')
+@php
+    $tipos = ['estrategia', 'redes', 'audiovisual', 'diseno'];
+    $fondos = ['estrategia' => 'hueso', 'redes' => 'negro', 'audiovisual' => 'petroleo', 'diseno' => 'negro'];
+    $coloresCinta = ['hueso', 'petroleo', 'negro', 'hueso'];
+    $n = $servicios->count();
+@endphp
 <div>
-    {{-- Hero --}}
-    <section class="relative py-24 sm:py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gray-900 via-chilo-dark to-gray-900 animate-gradient">
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-20 w-72 h-72 bg-chilo/20 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-chilo-light/15 rounded-full blur-3xl animate-float-delay"></div>
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+    {{-- Qué ofrecemos --}}
+    <section class="fondo-amarillo relative overflow-hidden">
+        <div aria-hidden="true" class="absolute -right-20 top-24 sm:right-0 lg:right-10 w-[22rem] sm:w-[28rem] lg:w-[34rem] pointer-events-none" data-paralaje="y:-25">
+            <svg viewBox="0 0 100 100" class="w-full" fill="none" stroke="var(--calado)" stroke-width=".6">
+                <path d="M36 4h28v32h32v28H64v32H36V64H4V36h32z"/>
+            </svg>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium px-4 py-2 rounded-full mb-6 animate-fade-down">
-                Soluciones digitales
-            </span>
-            <h1 class="text-4xl md:text-6xl font-black text-white mb-6 animate-fade-up">{{ $heroSeccion?->titulo ?? 'Nuestros Servicios' }}</h1>
-            <p class="text-xl text-white/70 max-w-2xl mx-auto animate-fade-up delay-200">{{ $heroSeccion?->subtitulo ?? 'Soluciones integrales de marketing digital y mentalidad para hacer crecer tu negocio.' }}</p>
-        </div>
-    </section>
-
-    {{-- Servicios Grid --}}
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="space-y-8">
-                @foreach($servicios as $i => $servicio)
-                    <div data-animate="{{ $i % 2 === 0 ? 'slide-right' : 'slide-left' }}" class="group bg-white rounded-3xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-chilo/10 transition-all duration-500">
-                        <div class="grid md:grid-cols-2 gap-0 {{ $i % 2 === 1 ? 'md:grid-flow-dense' : '' }}">
-                            {{-- Image --}}
-                            <div class="{{ $i % 2 === 1 ? 'md:col-start-2' : '' }} overflow-hidden">
-                                @if($servicio->imagen)
-                                    <img src="{{ asset('storage/' . $servicio->imagen) }}" alt="{{ $servicio->titulo }}" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                @else
-                                    {{-- Placeholder vacio cuando no hay imagen cargada --}}
-                                    <div class="w-full h-64 md:h-full bg-gray-100 flex items-center justify-center">
-                                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                    </div>
-                                @endif
-                            </div>
-                            {{-- Content --}}
-                            <div class="p-8 md:p-12 flex flex-col justify-center">
-                                <div class="w-14 h-14 bg-gradient-to-br from-chilo-dark to-chilo rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                    @switch($servicio->icono)
-                                        @case('share')
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-                                            @break
-                                        @case('megaphone')
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-                                            @break
-                                        @case('globe')
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-                                            @break
-                                        @case('brain')
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                            @break
-                                        @case('envelope')
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                            @break
-                                        @case('palette')
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
-                                            @break
-                                        @default
-                                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                    @endswitch
-                                </div>
-                                <h3 class="text-2xl font-black text-gray-900 mb-3">{{ $servicio->titulo }}</h3>
-                                <p class="text-gray-500 leading-relaxed text-lg">{{ $servicio->descripcion }}</p>
-                                <a href="/contacto" wire:navigate class="inline-flex items-center gap-2 text-chilo-dark font-bold mt-6 group-hover:gap-3 transition-all duration-300">
-                                    Consultar
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+        <div class="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-20 sm:pt-28 lg:pb-28 min-h-[88svh] flex flex-col">
+            <x-publica.cabecera rotulo="Qué ofrecemos" />
+            <div class="mt-auto pt-24 max-w-4xl">
+                <x-publica.titular como="h1" :texto="$heroSeccion?->titulo ?: 'Lo que hacemos *por tu marca*'" class="text-[clamp(3.4rem,min(10vw,15vh),8.6rem)]" />
+                @if($heroSeccion?->subtitulo)
+                    <p class="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed texto-suave">{{ $heroSeccion->subtitulo }}</p>
+                @endif
+                <ul class="mt-10 flex flex-wrap gap-x-5 gap-y-6 text-xl sm:text-2xl lg:text-3xl" aria-label="Servicios">
+                    @foreach($servicios as $i => $servicio)
+                        <li data-pega>
+                            <a href="#servicio-{{ $servicio->id }}"><x-publica.cinta :color="$coloresCinta[$i % 4]" :giro="$i % 2 ? 'der' : 'izq'">{{ $servicio->titulo }}</x-publica.cinta></a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </section>
 
-    {{-- CTA --}}
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-animate="fade-up">
-            <div class="bg-gradient-to-br from-chilo-dark via-chilo to-chilo-light rounded-3xl p-12 md:p-16 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
-                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
-                <div class="relative z-10">
-                    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ $ctaSeccion?->titulo ?? '¿Necesitas algo personalizado?' }}</h2>
-                    <p class="text-white/80 text-lg mb-8">{{ $ctaSeccion?->subtitulo ?? 'Cada negocio es único. Contanos qué necesitas y armamos una propuesta a tu medida.' }}</p>
-                    <a href="/contacto" wire:navigate class="inline-flex items-center gap-2 bg-white text-chilo-dark px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                        {{ $ctaSeccion?->contenido ?? 'Solicitar presupuesto' }}
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                    </a>
+    {{-- Subir contenido es fácil... --}}
+    @if($heroSeccion?->contenido)
+        <section class="fondo-negro relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-24 sm:py-32">
+                <x-publica.titular :texto="$heroSeccion->contenido" class="max-w-5xl text-[clamp(2.8rem,7.5vw,6.8rem)]" />
+            </div>
+        </section>
+    @endif
+
+    {{-- Un slide por servicio. --}}
+    @foreach($servicios as $i => $servicio)
+        @php
+            [$titularServicio, $textoServicio] = Marca::partir($servicio->descripcion);
+            $tipo = in_array($servicio->icono, $tipos, true) ? $servicio->icono : $tipos[$i % 4];
+        @endphp
+        <section id="servicio-{{ $servicio->id }}" class="fondo-{{ $fondos[$tipo] }} relative scroll-mt-16">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-24 pb-10 sm:pt-28 min-h-svh flex flex-col">
+                <x-publica.cabecera :rotulo="$servicio->titulo" />
+                <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center py-14">
+                    <div class="lg:col-span-5 {{ $i % 2 ? '' : 'lg:order-2' }} w-[62%] sm:w-[48%] lg:w-full max-w-md {{ $i % 2 ? '' : 'ml-auto' }}">
+                        @if($servicio->imagen)
+                            <div class="visor relative aspect-square p-3 text-[color:var(--trazo)]">
+                                <i></i><i></i><i></i><i></i>
+                                <img src="{{ asset('storage/'.$servicio->imagen) }}" alt="{{ $servicio->titulo }}" loading="lazy" class="w-full h-full object-cover">
+                            </div>
+                        @else
+                            <x-publica.pictograma :tipo="$tipo" />
+                        @endif
+                    </div>
+                    <div data-entra class="lg:col-span-7 {{ $i % 2 ? '' : 'lg:order-1' }}">
+                        <h2 class="sr-only">{{ $servicio->titulo }}</h2>
+                        <x-publica.titular como="p" :texto="$titularServicio ?: $servicio->titulo" class="text-[clamp(2.8rem,7vw,6.4rem)]" />
+                        @if($textoServicio)
+                            <p class="mt-7 max-w-lg text-lg sm:text-xl leading-relaxed texto-suave">{{ $textoServicio }}</p>
+                        @endif
+                    </div>
+                </div>
+                <div class="flex items-center justify-between gap-4 text-sm">
+                    <span class="cifras font-semibold texto-suave">{{ $i + 1 }}/{{ $n }}</span>
+                    <span class="rotulo texto-suave inline-flex items-center gap-2">@if($i + 1 < $n) Deslizá <x-publica.icono nombre="abajo" class="w-4 h-4" /> @else ¿Arrancamos? @endif</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endforeach
+
+    <x-publica.cierre :seccion="$ctaSeccion" titulo="¿Arrancamos?" bajada="Escribinos, contanos de tu marca y te armamos una propuesta." sticker="dale" />
 </div>
