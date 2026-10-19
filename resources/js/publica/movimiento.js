@@ -66,6 +66,8 @@ export function iniciarMovimiento(armar) {
 
     let contexto = null;
     let pendiente = null;
+    // Atrás/adelante del navegador: ahí sí se respeta la posición que restaura Livewire.
+    let desdeHistorial = false;
 
     const montar = () => {
         const html = document.documentElement;
@@ -74,10 +76,27 @@ export function iniciarMovimiento(armar) {
         html.classList.toggle('movimiento', ! quieto());
         contexto?.revert();
         frenarScroll(false);
+
+        // Lenis guarda su propia posición y la volvería a aplicar sobre la página nueva:
+        // una página nueva arranca arriba (o en su ancla); el historial, donde lo dejó Livewire.
+        if (lenis) {
+            lenis.resize();
+            const destino = desdeHistorial ? window.scrollY : 0;
+            lenis.scrollTo(destino, { immediate: true, force: true });
+        }
+        if (! desdeHistorial && location.hash.length > 1) {
+            requestAnimationFrame(() => irA(location.hash));
+        }
+        desdeHistorial = false;
+
         if (quieto()) return;
         contexto = gsap.context(() => armar());
         requestAnimationFrame(() => ScrollTrigger.refresh());
     };
+
+    document.addEventListener('livewire:navigate', (e) => {
+        desdeHistorial = Boolean(e.detail?.history);
+    });
 
     document.addEventListener('livewire:navigating', () => {
         contexto?.revert();
